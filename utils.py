@@ -3,7 +3,7 @@ import pydicom
 import matplotlib.pyplot as plt
 import pandas as pd
 import numpy as np
-%matplotlib inline
+# %matplotlib inline
 
 def rle2mask(rle, width, height):
     mask= np.zeros(width* height)
@@ -26,12 +26,12 @@ csv_path = "../../data/ibespalov/SIIM_ACR/train-rle.csv"
 
 
 
-def init_img_mask(file_path=file_path, csv_path=csv_path, kk=0):
+def init_img_mask(file_path=file_path, csv_path=csv_path, mask_id=0):
     dataset = pydicom.dcmread(file_path)
     init_img = dataset.pixel_array
     st = file_path.split(sep = "/")[-1][:-4]
     mask = pd.read_csv(csv_path)
-    RLE_mask = mask.loc[mask['ImageId'] == st][" EncodedPixels"].values[kk]
+    RLE_mask = mask.loc[mask['ImageId'] == st][" EncodedPixels"].values[mask_id]
     if RLE_mask.strip() != str(-1):
         rle_mask = rle2mask(RLE_mask[1:], 1024, 1024).T
     else:
@@ -42,7 +42,7 @@ def init_img_mask(file_path=file_path, csv_path=csv_path, kk=0):
     
 def plots(arg): #init_img, rle_mask, init_with_mask):
     init_img, rle_mask, with_mask = arg
-    fig, ax = plt.subplots(1, 3, figsize=(15,12))
+    fig, ax = plt.subplots(1, 3, figsize=(20,15))
     ax[0].imshow(init_img, cmap=plt.cm.bone)
     ax[1].imshow(rle_mask, cmap=plt.cm.bone)
     ax[2].imshow(with_mask, cmap=plt.cm.bone)
