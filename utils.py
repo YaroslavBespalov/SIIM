@@ -19,24 +19,29 @@ def rle2mask(rle, width, height):
 
     return mask.reshape(width, height)
 
-file_path = "../../data/ibespalov/SIIM_ACR/dicom-images-train/1.2.276.0.7230010.3.1.2.8323329.300.1517875162.258080/1.2.276.0.7230010.3.1.3.8323329.300.1517875162.258079/1.2.276.0.7230010.3.1.4.8323329.300.1517875162.258081.dcm"
+file_path = "../../data/ibespalov/SIIM_ACR/dicom-images-train/1.2.276.0.7230010.3.1.2.8323329.1851.1517875169.919022/1.2.276.0.7230010.3.1.3.8323329.1851.1517875169.919021/1.2.276.0.7230010.3.1.4.8323329.1851.1517875169.919023.dcm"
+#file_path = "../../data/ibespalov/SIIM_ACR/dicom-images-train/1.2.276.0.7230010.3.1.2.8323329.302.1517875162.286329/1.2.276.0.7230010.3.1.3.8323329.302.1517875162.286328/1.2.276.0.7230010.3.1.4.8323329.302.1517875162.286330.dcm"
+
 csv_path = "../../data/ibespalov/SIIM_ACR/train-rle.csv"
 
-def init_img_mask(file_path=file_path, csv_path=csv_path):
+
+
+def init_img_mask(file_path=file_path, csv_path=csv_path, kk=0):
     dataset = pydicom.dcmread(file_path)
     init_img = dataset.pixel_array
     st = file_path.split(sep = "/")[-1][:-4]
     mask = pd.read_csv(csv_path)
-    RLE_mask = mask.loc[mask['ImageId'] == st][" EncodedPixels"].iloc[0]
-    rle_mask = rle2mask(RLE_mask[1:], 1024, 1024)
+    RLE_mask = mask.loc[mask['ImageId'] == st][" EncodedPixels"].values[kk]
+    if RLE_mask.strip() != str(-1):
+        rle_mask = rle2mask(RLE_mask[1:], 1024, 1024).T
+    else:
+        rle_mask = np.zeros((1024, 1024))
     init_with_mask = copy.deepcopy(dataset.pixel_array)
     init_with_mask[np.where(rle_mask)] = 1
     return init_img, rle_mask, init_with_mask
     
-def plots(*args): #init_img, rle_mask, init_with_mask):
-    init_img=args[0]
-    rle_mask=args[1]
-    with_mask=args[2]
+def plots(arg): #init_img, rle_mask, init_with_mask):
+    init_img, rle_mask, with_mask = arg
     fig, ax = plt.subplots(1, 3, figsize=(15,12))
     ax[0].imshow(init_img, cmap=plt.cm.bone)
     ax[1].imshow(rle_mask, cmap=plt.cm.bone)
