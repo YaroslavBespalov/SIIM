@@ -2,15 +2,17 @@ import glob
 import shutil
 import os
 
-copy_path = '../../data/ibespalov/SIIM_ACR/train_samples'
-train_path = '../../data/ibespalov/SIIM_ACR/dicom-images-train/*/*/*.dcm'
+PATH = '../../data/ibespalov/SIIM_ACR'
+
+copy_path = '{}/train_samples'.format(PATH)
+train_path = '{}/dicom-images-train/*/*/*.dcm'.format(PATH)
 
 for file_name in glob.glob(train_path):
     tmp = os.path.join(copy_path, file_name.split(sep="/")[-1])
     shutil.copy2(file_name, tmp)
 
-copy_path = '../../data/ibespalov/SIIM_ACR/test_samples'
-test_path = '../../data/ibespalov/SIIM_ACR/dicom-images-test/*/*/*.dcm'
+copy_path = '{}/test_samples'.format(PATH)
+test_path = '{}/dicom-images-test/*/*/*.dcm'.format(PATH)
 
 for file_name in glob.glob(test_path):
     tmp = os.path.join(copy_path, file_name.split(sep="/")[-1])
