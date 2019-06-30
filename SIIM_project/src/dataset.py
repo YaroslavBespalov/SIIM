@@ -108,7 +108,6 @@ class TaskDataFactory(DataFactory):
     def make_dataset(self, stage, is_train):
         transform = self.make_transform(stage, is_train)
         folds = self.train_ids if is_train else self.val_ids
-        print(self.data_path)
         return TrainDataset(
             path=str(self.data_path),
             #            mask_dir=self.data_path / self.paths['train_masks'],

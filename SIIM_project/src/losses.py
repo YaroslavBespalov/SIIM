@@ -67,16 +67,15 @@ class LossBinaryDice(nn.Module):
         self.dice_weight = dice_weight
 
     def forward(self, outputs, targets):
-        targets = targets.squeeze().view(-1)
-        outputs = outputs.squeeze().view(-1)
+        targets = targets.squeeze().view(-1).double()
+        outputs = outputs.squeeze().view(-1).double()
 
         loss = self.nll_loss(outputs, targets)
 
         if self.dice_weight:
-            smooth = 1e-15
-            target = (targets > 0.0).float()
-            prediction = F.sigmoid(outputs)
-            #             prediction = (prediction>.5).float()
+            smooth = torch.tensor(1e-15).double()
+            target = (targets > 0.0).double()
+            prediction = F.sigmoid(outputs).double()
             dice_part = (1 - (2 * torch.sum(prediction * target, dim=0) + smooth) / \
                          (torch.sum(prediction, dim=0) + torch.sum(target, dim=0) + smooth))
 
