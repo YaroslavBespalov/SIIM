@@ -5,6 +5,32 @@ import pandas as pd
 import numpy as np
 # %matplotlib inline
 
+def mask_to_rle(img, width, height):
+    rle = []
+    lastColor = 0
+    currentPixel = 0
+    runStart = -1
+    runLength = 0
+
+    for x in range(width):
+        for y in range(height):
+            currentColor = img[x][y]
+            if currentColor != lastColor:
+                if currentColor == 1:
+                    runStart = currentPixel
+                    runLength = 1
+                else:
+                    rle.append(str(runStart))
+                    rle.append(str(runLength))
+                    runStart = -1
+                    runLength = 0
+                    currentPixel = 0
+            elif runStart > -1:
+                runLength += 1
+            lastColor = currentColor
+            currentPixel+=1
+    return " " + " ".join(rle)
+
 def rle2mask(rle, width, height):
     mask= np.zeros(width* height)
     array = np.asarray([int(x) for x in rle.split()])
@@ -39,7 +65,7 @@ def init_img_mask(file_path=file_path, csv_path=csv_path, mask_id=0):
     init_with_mask = copy.deepcopy(dataset.pixel_array)
     init_with_mask[np.where(rle_mask)] = 1
     return init_img, rle_mask, init_with_mask
-    
+
 def plots(arg): #init_img, rle_mask, init_with_mask):
     init_img, rle_mask, with_mask = arg
     fig, ax = plt.subplots(1, 3, figsize=(20,15))
@@ -47,5 +73,3 @@ def plots(arg): #init_img, rle_mask, init_with_mask):
     ax[1].imshow(rle_mask, cmap=plt.cm.bone)
     ax[2].imshow(with_mask, cmap=plt.cm.bone)
     plt.show()
-    
-    
