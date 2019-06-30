@@ -6,7 +6,7 @@ from utils import init_img_mask
 import os
 
 def get_path(idx):
-    return os.listdir()
+    return os.listdir('./SIIM/')[idx]
 
 
 class LoadData(Dataset):
