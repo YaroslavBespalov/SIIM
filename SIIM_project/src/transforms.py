@@ -20,7 +20,8 @@ def post_transform():
         Normalize(
             mean=(0.485),
             std=(0.229)),
-        ToTensor()])
+        #ToTensor()
+    ])
 
 
 def mix_transform(resize):
@@ -28,10 +29,10 @@ def mix_transform(resize):
         pre_transform(resize=resize),
         #Rotate(limit=10, interpolation=cv2.INTER_LINEAR),
        # IAAAdditiveGaussianNoise(p=0.25),
-      #  VerticalFlip(),
-        HorizontalFlip(),
+       # VerticalFlip(),
+       # HorizontalFlip(),
       #  RandomGamma(),
-    #    RandomRotate90(),
+      #  RandomRotate90(),
         post_transform()
     ])
 

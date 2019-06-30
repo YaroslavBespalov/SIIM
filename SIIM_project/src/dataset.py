@@ -12,7 +12,6 @@ import torchvision
 import copy
 
 
-
 def rle2mask(rle, width, height):
     mask = np.zeros(width * height)
     array = np.asarray([int(x) for x in rle.split()])
@@ -49,11 +48,12 @@ class TrainDataset(BaseDataset):
         self.folds = folds
         self.csv_file = folds
         self.transform = transform
-    def __getitem__(self, index):
-        name = self.csv_file.iloc[index].ImageId
 
+    def __getitem__(self, index):
+
+        name = self.csv_file.iloc[index].ImageId
         image = pydicom.dcmread(os.path.join(self.path, name + '.dcm')).pixel_array
-        RLE_mask = self.csv_file.loc[self.csv_file['ImageId'] == name][" EncodedPixels"].values[-1]
+        RLE_mask = self.csv_file.loc[self.csv_file['ImageId'] == name][" EncodedPixels"].values[0]
         if RLE_mask.strip() != str(-1):
             rle_mask = rle2mask(RLE_mask[1:], 1024, 1024).T
         else:
@@ -63,10 +63,12 @@ class TrainDataset(BaseDataset):
         #     image = self.transform(image)
         #     rle_mask = self.transform(rle_mask)
 
-        image = torchvision.transforms.ToTensor()(image)
-        rle_mask = torchvision.transforms.ToTensor()(rle_mask)
-
-        return {"image": image, "mask": rle_mask}
+        #  image = torchvision.transforms.ToTensor()(image)
+        #   rle_mask = torchvision.transforms.ToTensor()(rle_mask)
+        dict_trasnformns = self.transform(image=image, mask=rle_mask)
+        image = dict_trasnformns['image']
+        rle_mask = dict_trasnformns['mask']
+        return {"image": torchvision.transforms.ToTensor()(image), "mask": torchvision.transforms.ToTensor()(rle_mask)}
 
     def __len__(self):
         return len(self.csv_file)
