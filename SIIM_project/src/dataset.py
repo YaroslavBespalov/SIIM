@@ -1,5 +1,3 @@
-from load_function import get_path, get_list
-
 import cv2
 import os
 import torch
@@ -10,9 +8,9 @@ from torch.utils.data import Dataset, DataLoader
 from youtrain.factory import DataFactory
 from transforms import test_transform, mix_transform
 import pydicom
+import torchvision
 import copy
 
-PATH = './SIIM/train-samples'
 
 
 def rle2mask(rle, width, height):
@@ -31,35 +29,42 @@ def rle2mask(rle, width, height):
 
 
 class BaseDataset(Dataset):
-    def __init__(self, path, transform):
-        self.ids = get_path(path + '/')
+    def __init__(self, folds, transform):
+        self.csv = folds
         self.transform = transform
 
     #        print(len(self.ids))
 
     def __len__(self):
-        return len(self.ids)
+        return len(self.csv)
 
     def __getitem__(self, index):
         raise NotImplementedError
 
 
 class TrainDataset(BaseDataset):
-    def __init__(self, path, folds, transform):
-        super().__init__(path, transform)
+    def __init__(self, path, folds, transform=None):
+        super().__init__(folds, transform)
+        self.path = path
         self.folds = folds
-        self.csv_file = pd.read_csv(path)
-
+        self.csv_file = folds
+        self.transform = transform
     def __getitem__(self, index):
         name = self.csv_file.iloc[index].ImageId
-        name = os.path.join(PATH, name)
 
-        image = pydicom.dcmread(name).pixel_array
+        image = pydicom.dcmread(os.path.join(self.path, name + '.dcm')).pixel_array
         RLE_mask = self.csv_file.loc[self.csv_file['ImageId'] == name][" EncodedPixels"].values[-1]
         if RLE_mask.strip() != str(-1):
             rle_mask = rle2mask(RLE_mask[1:], 1024, 1024).T
         else:
             rle_mask = np.zeros((1024, 1024))
+
+        # if self.transform is not None:
+        #     image = self.transform(image)
+        #     rle_mask = self.transform(rle_mask)
+
+        image = torchvision.transforms.ToTensor()(image)
+        rle_mask = torchvision.transforms.ToTensor()(rle_mask)
 
         return {"image": image, "mask": rle_mask}
 
@@ -103,7 +108,7 @@ class TaskDataFactory(DataFactory):
     def make_dataset(self, stage, is_train):
         transform = self.make_transform(stage, is_train)
         folds = self.train_ids if is_train else self.val_ids
-        #        print(self.data_path)
+        print(self.data_path)
         return TrainDataset(
             path=str(self.data_path),
             #            mask_dir=self.data_path / self.paths['train_masks'],

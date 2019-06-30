@@ -1,17 +1,19 @@
+import numpy as np
 from tqdm import tqdm
+import pandas as pd
+from utils import rle2mask, mask_to_rle
 
 new_csv = {}
 new_csv['ImageId'] = []
 new_csv[' EncodedPixels'] = []
 
-
-PATH = "../../data/ibespalov/SIIM_ACR/train-rle.csv"
-PATH_TO_SAVE = "../../data/ibespalov/SIIM_ACR/train.csv"
+PATH = '/Users/nikita/Programming/SIIM/SIIM/train-rle.csv'  # "../../data/ibespalov/SIIM_ACR/train-rle.csv"
+PATH_TO_SAVE = '/Users/nikita/Programming/SIIM/SIIM/train.csv'  # "../../data/ibespalov/SIIM_ACR/train.csv"
 
 mask = pd.read_csv(PATH)
 
 k = mask.groupby('ImageId').count()[" EncodedPixels"]
-list_ImageId = k.index[k>1]
+list_ImageId = k.index[k > 1]
 
 for i in tqdm(range(len(list_ImageId))):
     tmp = mask.loc[mask['ImageId'] == list_ImageId[i]]
@@ -29,7 +31,7 @@ for i in tqdm(range(len(list_ImageId))):
     new_csv[' EncodedPixels'].append(final_rle)
 
 k = mask.groupby('ImageId').count()[" EncodedPixels"]
-list_ImageId = k.index[k==1]
+list_ImageId = k.index[k == 1]
 
 for i in tqdm(range(len(list_ImageId))):
     new_csv['ImageId'].append(list_ImageId[i])
@@ -38,5 +40,5 @@ for i in tqdm(range(len(list_ImageId))):
 new_df = pd.DataFrame(data=new_csv)
 df = new_df
 df = df.sample(frac=1).reset_index(drop=True)
-df['fold'] = [ i % 10 for i in np.arange(len(df))]
+df['fold'] = [i % 10 for i in np.arange(len(df))]
 df.to_csv(PATH_TO_SAVE, index=False)

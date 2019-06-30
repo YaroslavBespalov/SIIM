@@ -5,6 +5,7 @@ from torch.autograd import Variable
 import numpy as np
 import pydoc
 
+
 class CrossEntropyLoss(nn.Module):
     def __init__(self, weight=None, size_average=True):
         super(CrossEntropyLoss, self).__init__()
@@ -25,9 +26,10 @@ class BCELoss2d(nn.Module):
         loss = 0
         for i in range(2):
             probs_flat = probs[:, i].contiguous().view(-1)
-            targets_flat = (targets==i+1).float().contiguous().view(-1)
+            targets_flat = (targets == i + 1).float().contiguous().view(-1)
             loss += self.bce_loss(probs_flat, targets_flat)
         return loss
+
 
 # class FocalLoss(nn.Module):
 #     def __init__(self, gamma=2):
@@ -74,13 +76,13 @@ class LossBinaryDice(nn.Module):
             smooth = 1e-15
             target = (targets > 0.0).float()
             prediction = F.sigmoid(outputs)
-#             prediction = (prediction>.5).float()
-            dice_part = (1 - (2*torch.sum(prediction * target, dim=0) + smooth) / \
-                            (torch.sum(prediction, dim=0) + torch.sum(target, dim=0) + smooth))
-
+            #             prediction = (prediction>.5).float()
+            dice_part = (1 - (2 * torch.sum(prediction * target, dim=0) + smooth) / \
+                         (torch.sum(prediction, dim=0) + torch.sum(target, dim=0) + smooth))
 
             loss += self.dice_weight * dice_part.mean()
         return loss
+
 
 class LossMultiLabelDice(nn.Module):
     def __init__(self, dice_weight=1):
@@ -104,9 +106,9 @@ class LossMultiLabelDice(nn.Module):
 
     def forward(self, outputs, targets):
 
-       # print(outputs.size())
+        # print(outputs.size())
         targets = targets.squeeze().permute(0, 3, 1, 2)
-       # print(targets.size())
+        # print(targets.size())
         loss = self.focal_loss(outputs, targets)
         if self.dice_weight:
             loss += self.dice_weight * self.dice_coef_multilabel(outputs, targets)
@@ -143,7 +145,7 @@ class GeneralizedDiceLoss2D(nn.Module):
         intersection = torch.sum(torch.sum(probas * one_hot_masks, dim=(1, 2)) * weights)
         union = torch.sum(torch.sum(probas + one_hot_masks, dim=(1, 2)) * weights)
 
-        dice_loss =  1 - 2 * (intersection + EPS) / (union + EPS)
+        dice_loss = 1 - 2 * (intersection + EPS) / (union + EPS)
 
         return dice_loss
 
@@ -173,9 +175,10 @@ class MeanDiceLoss2D(nn.Module):
 
         intersection = torch.sum(probas * one_hot_masks, dim=(1, 2))
         union = torch.sum(torch.pow(probas, 2), dim=(1, 2)) + torch.sum(torch.pow(one_hot_masks, 2), dim=(1, 2))
-        dice_loss =  torch.mean(2 * (intersection + EPS) / (union + EPS), dim=1)
+        dice_loss = torch.mean(2 * (intersection + EPS) / (union + EPS), dim=1)
 
         return -torch.mean(dice_loss)
+
 
 class CrossEntropyDiceLoss2D(nn.Module):
 
@@ -186,9 +189,9 @@ class CrossEntropyDiceLoss2D(nn.Module):
         self.dice_loss = MeanDiceLoss2D()
 
     def forward(self, logits, targets):
-
         return self.ce_loss(logits, targets) \
                + self.dice_weight * self.dice_loss(logits, targets)
+
 
 class MeanDiceLoss3D(nn.Module):
 
@@ -215,9 +218,10 @@ class MeanDiceLoss3D(nn.Module):
 
         intersection = torch.sum(probas * one_hot_masks, dim=(1, 2, 3))
         union = torch.sum(torch.pow(probas, 2), dim=(1, 2, 3)) + torch.sum(torch.pow(one_hot_masks, 2), dim=(1, 2, 3))
-        dice_loss =  torch.mean(2 * (intersection + EPS) / (union + EPS), dim=1)
+        dice_loss = torch.mean(2 * (intersection + EPS) / (union + EPS), dim=1)
 
         return -torch.mean(dice_loss)
+
 
 class CrossEntropyDiceLoss3D(nn.Module):
 
@@ -230,5 +234,3 @@ class CrossEntropyDiceLoss3D(nn.Module):
     def forward(self, logits, targets):
         return self.ce_loss(logits, targets) \
                + self.dice_weight * self.dice_loss(logits, targets)
-
-

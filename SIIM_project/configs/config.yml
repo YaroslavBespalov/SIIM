@@ -8,12 +8,12 @@ train_params:
   name: Unet3d_organ_26_06_SGD
 # 3d_unet_ChannelAttention_flip_plus_shift_raq_FPN
 #  model: models_zoo.segmentation.pspnet.PSPNet
-# model: models_zoo.segmentation.unet.UNet
-  model: models_zoo.segmentation.unet3d.Modified3DUNet
-  model_params: {}
+  model: models_zoo.segmentation.unet.UNet
+#  model: models_zoo.segmentation.unet3d.Modified3DUNet
+  model_params: {
 #    num_filters: 16
 #    pretrained: False
-#    num_classes: 1
+    n_classes: 1}
   loss: losses.LossBinaryDice
   loss_params: {}
   metrics: [metrics.Dice]

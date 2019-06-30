@@ -5,9 +5,9 @@ dumps:
   name_save: tt                     # name to save models
 
 data:
-  path: ../../../../raid/data/decathlon # path to data directory
+  path: /Users/nikita/Programming/SIIM/SIIM/train_samples # path to data directory
   train_images: ./   # dir to train images
   train_masks: ./    # dir to labels
   test_images: images_test/  # dir to test
-  folds: ./Task07_Pancreas_npz/folds.csv    # validation folds
+  folds: ../train.csv    # validation folds
   predictions_path: preds.csv       # predictions name
