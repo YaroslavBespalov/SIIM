@@ -1,5 +1,5 @@
 data_params:
-  batch_size: 4
+  batch_size: 16
   num_workers: 16
   augmentation_params:
     resize: 224

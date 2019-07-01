@@ -1,7 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="1bdeac7e-f766-4f71-bdd0-dfaea62f64cf" name="Default Changelist" comment="" />
+    <list default="true" id="1bdeac7e-f766-4f71-bdd0-dfaea62f64cf" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/deployment.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/deployment.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/kg1_pipeline_server.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/kg1_pipeline_server.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/configs/config.yml" beforeDir="false" afterPath="$PROJECT_DIR$/configs/config.yml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/configs/path.yml" beforeDir="false" afterPath="$PROJECT_DIR$/configs/path.yml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/dataset.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/dataset.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/transforms.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/transforms.py" afterDir="false" />
+    </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -25,21 +35,9 @@
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/train.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="360">
-              <caret line="88" column="10" selection-start-line="88" selection-start-column="10" selection-end-line="88" selection-end-column="10" />
-              <folding>
-                <element signature="e#0#15#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/schedulers.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="192">
+            <state relative-caret-position="168">
               <caret line="8" column="34" selection-start-line="8" selection-start-column="34" selection-end-line="8" selection-end-column="34" />
               <folding>
                 <element signature="e#0#49#0" expanded="true" />
@@ -51,8 +49,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/models_zoo/segmentation/unet.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="211">
-              <caret line="76" lean-forward="true" selection-start-line="76" selection-end-line="76" />
+            <state relative-caret-position="1776">
+              <caret line="76" selection-start-line="76" selection-end-line="76" />
               <folding>
                 <element signature="e#0#12#0" expanded="true" />
               </folding>
@@ -63,17 +61,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/configs/path.yml">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="96">
-              <caret line="4" column="15" selection-start-line="4" selection-start-column="15" selection-end-line="4" selection-end-column="15" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/../../../../Pedestrial_project/Vehicle-And-Pedestrian-Detection-Using-Haar-Cascades-master/Main Project/Main Project/Pedestrian Detection/detection_pedestrian.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="767">
-              <caret line="32" lean-forward="true" selection-start-line="32" selection-end-line="32" />
+            <state relative-caret-position="288">
+              <caret line="12" column="30" selection-start-line="12" selection-start-column="30" selection-end-line="12" selection-end-column="30" />
             </state>
           </provider>
         </entry>
@@ -81,8 +70,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/configs/config.yml">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="168">
-              <caret line="7" column="30" selection-start-line="7" selection-start-column="30" selection-end-line="7" selection-end-column="30" />
+            <state relative-caret-position="192">
+              <caret line="8" column="23" selection-start-line="8" selection-start-column="23" selection-end-line="8" selection-end-column="23" />
             </state>
           </provider>
         </entry>
@@ -90,8 +79,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/losses.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="24">
-              <caret line="82" column="19" lean-forward="true" selection-start-line="82" selection-start-column="19" selection-end-line="82" selection-end-column="19" />
+            <state relative-caret-position="1968">
+              <caret line="82" column="19" selection-start-line="82" selection-start-column="19" selection-end-line="82" selection-end-column="19" />
               <folding>
                 <element signature="e#0#21#0" expanded="true" />
               </folding>
@@ -99,23 +88,41 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="false">
+      <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/dataset.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="2630">
-              <caret line="132" column="40" lean-forward="true" selection-start-line="132" selection-start-column="40" selection-end-line="132" selection-end-column="40" />
+            <state relative-caret-position="296">
+              <caret line="73" column="42" selection-start-line="73" selection-start-column="42" selection-end-line="73" selection-end-column="42" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/train.sh">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="120">
+              <caret line="5" column="12" lean-forward="true" selection-start-line="5" selection-start-column="12" selection-end-line="5" selection-end-column="12" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/transforms.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="345">
+              <caret line="23" column="6" lean-forward="true" selection-start-line="23" selection-start-column="6" selection-end-line="23" selection-end-column="6" />
               <folding>
-                <element signature="e#0#44#0" expanded="true" />
+                <element signature="e#0#28#0" expanded="true" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/load_function.py">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="264">
-              <caret line="11" column="22" lean-forward="true" selection-start-line="11" selection-start-column="22" selection-end-line="11" selection-end-column="22" />
+              <caret line="11" column="22" selection-start-line="11" selection-start-column="22" selection-end-line="11" selection-end-column="22" />
               <folding>
                 <element signature="e#0#18#0" expanded="true" />
               </folding>
@@ -176,6 +183,9 @@
       <find>make_da</find>
     </findStrings>
   </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/.." />
+  </component>
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
@@ -191,18 +201,18 @@
         <option value="$PROJECT_DIR$/src/models_zoo/models_3d/unet3d.py" />
         <option value="$PROJECT_DIR$/src/youtrain/factory.py" />
         <option value="$PROJECT_DIR$/src/youtrain/callbacks.py" />
-        <option value="$PROJECT_DIR$/src/transforms.py" />
         <option value="$PROJECT_DIR$/load_function.py" />
         <option value="$PROJECT_DIR$/src/metrics.py" />
-        <option value="$PROJECT_DIR$/configs/path.yml" />
         <option value="$PROJECT_DIR$/src/train.py" />
         <option value="$PROJECT_DIR$/src/losses.py" />
         <option value="$PROJECT_DIR$/src/models_zoo/segmentation/unet3d.py" />
         <option value="$PROJECT_DIR$/src/models_zoo/segmentation/cascade.py" />
         <option value="$PROJECT_DIR$/train.sh" />
         <option value="$PROJECT_DIR$/src/youtrain/runner.py" />
-        <option value="$PROJECT_DIR$/src/dataset.py" />
+        <option value="$PROJECT_DIR$/configs/path.yml" />
         <option value="$PROJECT_DIR$/configs/config.yml" />
+        <option value="$PROJECT_DIR$/src/transforms.py" />
+        <option value="$PROJECT_DIR$/src/dataset.py" />
       </list>
     </option>
   </component>
@@ -211,55 +221,33 @@
     <option name="width" value="1440" />
     <option name="height" value="798" />
   </component>
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="ProjectView">
     <navigator proportions="" version="1">
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
             <path>
-              <item name="kg1_article" type="b2602c69:ProjectViewProjectNode" />
-              <item name="kg1_article" type="462c0819:PsiDirectoryNode" />
+              <item name="SIIM_project" type="b2602c69:ProjectViewProjectNode" />
+              <item name="SIIM_project" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
-              <item name="kg1_article" type="b2602c69:ProjectViewProjectNode" />
-              <item name="kg1_article" type="462c0819:PsiDirectoryNode" />
-              <item name="configs" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="kg1_article" type="b2602c69:ProjectViewProjectNode" />
-              <item name="kg1_article" type="462c0819:PsiDirectoryNode" />
+              <item name="SIIM_project" type="b2602c69:ProjectViewProjectNode" />
+              <item name="SIIM_project" type="462c0819:PsiDirectoryNode" />
               <item name="src" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="kg1_article" type="b2602c69:ProjectViewProjectNode" />
-              <item name="kg1_article" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="models_zoo" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="kg1_article" type="b2602c69:ProjectViewProjectNode" />
-              <item name="kg1_article" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="models_zoo" type="462c0819:PsiDirectoryNode" />
-              <item name="segmentation" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="kg1_article" type="b2602c69:ProjectViewProjectNode" />
-              <item name="kg1_article" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="youtrain" type="462c0819:PsiDirectoryNode" />
             </path>
           </expand>
           <select />
         </subPane>
       </pane>
+      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
+    <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="WebServerToolWindowPanel.toolwindow.highlight.mappings" value="true" />
     <property name="WebServerToolWindowPanel.toolwindow.highlight.symlinks" value="true" />
@@ -272,7 +260,7 @@
     <property name="node.js.selected.package.eslint" value="(autodetect)" />
     <property name="nodejs_interpreter_path.stuck_in_default_project" value="undefined stuck path" />
     <property name="nodejs_npm_path_reset_for_default_project" value="true" />
-    <property name="settings.editor.selected.configurable" value="org.jetbrains.plugins.notebooks.jupyter.connections.configuration.JupyterServerConfigurable" />
+    <property name="settings.editor.selected.configurable" value="com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable" />
   </component>
   <component name="PyConsoleOptionsProvider">
     <option name="myPythonConsoleState">
@@ -336,17 +324,18 @@
       <workItem from="1561241418434" duration="156000" />
       <workItem from="1561288510438" duration="754000" />
       <workItem from="1561289375768" duration="16707000" />
+      <workItem from="1561912955968" duration="2047000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="133767000" />
+    <option name="totallyTimeSpent" value="135814000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="23" width="1440" height="798" extended-state="0" />
     <editor active="true" />
     <layout>
-      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.31473532" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.3190272" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Favorites" order="2" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
@@ -359,10 +348,10 @@
       <window_info anchor="bottom" id="Docker" order="7" show_stripe_button="false" />
       <window_info anchor="bottom" id="Version Control" order="8" />
       <window_info anchor="bottom" id="Database Changes" order="9" />
-      <window_info anchor="bottom" id="Event Log" order="10" side_tool="true" weight="0.32909605" />
-      <window_info anchor="bottom" id="Terminal" order="11" weight="0.36685553" />
+      <window_info anchor="bottom" id="Event Log" order="10" sideWeight="0.5007153" side_tool="true" weight="0.32577905" />
+      <window_info anchor="bottom" id="Terminal" order="11" sideWeight="0.49928468" weight="0.36685553" />
       <window_info anchor="bottom" id="Python Console" order="12" weight="0.32768363" />
-      <window_info anchor="bottom" id="File Transfer" order="13" visible="true" weight="0.32577905" />
+      <window_info anchor="bottom" id="File Transfer" order="13" sideWeight="0.49928468" visible="true" weight="0.32577905" />
       <window_info anchor="right" id="Commander" order="0" weight="0.4" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
@@ -434,9 +423,7 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/Untitled.ipynb">
-      <provider selected="true" editor-type-id="jupyter-editor" />
-    </entry>
+    <entry file="file://$PROJECT_DIR$/Untitled.ipynb" />
     <entry file="file://$PROJECT_DIR$/src/models_zoo/segmentation/extractors.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="24">
@@ -484,16 +471,6 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/utils.py">
       <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/transforms.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="696">
-          <caret line="38" column="20" selection-start-line="38" selection-start-column="20" selection-end-line="38" selection-end-column="20" />
-          <folding>
-            <element signature="e#0#28#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/ND_Crossentropy.py">
       <provider selected="true" editor-type-id="text-editor">
@@ -592,13 +569,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/train.sh">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="48">
-          <caret line="2" column="65" selection-start-line="2" selection-start-column="65" selection-end-line="2" selection-end-column="65" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/models_zoo/segmentation/densenet.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-143">
@@ -609,9 +579,11 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$USER_HOME$/Pedestrial_project/Vehicle-And-Pedestrian-Detection-Using-Haar-Cascades-master/Main Project/Main Project/Pedestrian Detection/detection_pedestrian.py" />
+    <entry file="file://$PROJECT_DIR$/data_analysis.ipynb" />
     <entry file="file://$PROJECT_DIR$/src/train.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="360">
+        <state relative-caret-position="2112">
           <caret line="88" column="10" selection-start-line="88" selection-start-column="10" selection-end-line="88" selection-end-column="10" />
           <folding>
             <element signature="e#0#15#0" expanded="true" />
@@ -621,7 +593,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/schedulers.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="192">
+        <state relative-caret-position="168">
           <caret line="8" column="34" selection-start-line="8" selection-start-column="34" selection-end-line="8" selection-end-column="34" />
           <folding>
             <element signature="e#0#49#0" expanded="true" />
@@ -631,32 +603,21 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/models_zoo/segmentation/unet.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="211">
-          <caret line="76" lean-forward="true" selection-start-line="76" selection-end-line="76" />
+        <state relative-caret-position="1776">
+          <caret line="76" selection-start-line="76" selection-end-line="76" />
           <folding>
             <element signature="e#0#12#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/configs/config.yml">
+    <entry file="file://$PROJECT_DIR$/src/losses.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="168">
-          <caret line="7" column="30" selection-start-line="7" selection-start-column="30" selection-end-line="7" selection-end-column="30" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/configs/path.yml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="96">
-          <caret line="4" column="15" selection-start-line="4" selection-start-column="15" selection-end-line="4" selection-end-column="15" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/../../../../Pedestrial_project/Vehicle-And-Pedestrian-Detection-Using-Haar-Cascades-master/Main Project/Main Project/Pedestrian Detection/detection_pedestrian.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="767">
-          <caret line="32" lean-forward="true" selection-start-line="32" selection-end-line="32" />
+        <state relative-caret-position="1968">
+          <caret line="82" column="19" selection-start-line="82" selection-start-column="19" selection-end-line="82" selection-end-column="19" />
+          <folding>
+            <element signature="e#0#21#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
@@ -668,36 +629,51 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/data_analysis.ipynb">
-      <provider selected="true" editor-type-id="jupyter-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/losses.py">
+    <entry file="file://$PROJECT_DIR$/load_function.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="24">
-          <caret line="82" column="19" lean-forward="true" selection-start-line="82" selection-start-column="19" selection-end-line="82" selection-end-column="19" />
+        <state relative-caret-position="264">
+          <caret line="11" column="22" selection-start-line="11" selection-start-column="22" selection-end-line="11" selection-end-column="22" />
           <folding>
-            <element signature="e#0#21#0" expanded="true" />
+            <element signature="e#0#18#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/configs/config.yml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="192">
+          <caret line="8" column="23" selection-start-line="8" selection-start-column="23" selection-end-line="8" selection-end-column="23" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/configs/path.yml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="288">
+          <caret line="12" column="30" selection-start-line="12" selection-start-column="30" selection-end-line="12" selection-end-column="30" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/train.sh">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="120">
+          <caret line="5" column="12" lean-forward="true" selection-start-line="5" selection-start-column="12" selection-end-line="5" selection-end-column="12" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/transforms.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="345">
+          <caret line="23" column="6" lean-forward="true" selection-start-line="23" selection-start-column="6" selection-end-line="23" selection-end-column="6" />
+          <folding>
+            <element signature="e#0#28#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/dataset.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="2630">
-          <caret line="132" column="40" lean-forward="true" selection-start-line="132" selection-start-column="40" selection-end-line="132" selection-end-column="40" />
-          <folding>
-            <element signature="e#0#44#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/load_function.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="264">
-          <caret line="11" column="22" lean-forward="true" selection-start-line="11" selection-start-column="22" selection-end-line="11" selection-end-column="22" />
-          <folding>
-            <element signature="e#0#18#0" expanded="true" />
-          </folding>
+        <state relative-caret-position="296">
+          <caret line="73" column="42" selection-start-line="73" selection-start-column="42" selection-end-line="73" selection-end-column="42" />
         </state>
       </provider>
     </entry>

@@ -65,11 +65,13 @@ class TrainDataset(BaseDataset):
 
         #  image = torchvision.transforms.ToTensor()(image)
         #   rle_mask = torchvision.transforms.ToTensor()(rle_mask)
-        dict_trasnformns = self.transform(image=image, mask=rle_mask)
-        image = dict_trasnformns['image']
-        rle_mask = dict_trasnformns['mask']
-        return {"image": torchvision.transforms.ToTensor()(image), "mask": torchvision.transforms.ToTensor()(rle_mask)}
-
+        #dict_trasnformns = self.transform(image=image, mask=rle_mask)
+        #image = dict_trasnformns['image']
+        #rle_mask = dict_trasnformns['mask']
+        #return {"image": torchvision.transforms.ToTensor()(image), "mask": torchvision.transforms.ToTensor()(rle_mask)}
+        print("Image None Shape",image[None].shape)
+        print("Mask None Shape", rle_mask[None].shape)
+        return self.transform(image=image[None], mask=rle_mask[None])
     def __len__(self):
         return len(self.csv_file)
 

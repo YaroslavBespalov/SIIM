@@ -5,7 +5,7 @@
       <paths name="ibespalov@skoltech-dgx-station:22">
         <serverdata>
           <mappings>
-            <mapping deploy="/home/ibespalov/env/kg1_article" local="$PROJECT_DIR$" />
+            <mapping deploy="/home/ibespalov/env/SIIM_project" local="$PROJECT_DIR$" />
           </mappings>
         </serverdata>
       </paths>

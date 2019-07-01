@@ -20,7 +20,7 @@ def post_transform():
         Normalize(
             mean=(0.485),
             std=(0.229)),
-        #ToTensor()
+        ToTensor()
     ])
 
 
