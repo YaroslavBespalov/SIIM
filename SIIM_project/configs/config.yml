@@ -1,22 +1,24 @@
 data_params:
-  batch_size: 16
+  batch_size: 43
   num_workers: 16
   augmentation_params:
     resize: 224
 
 train_params:
-  name: Unet3d_organ_26_06_SGD
+  name: Classification_resnet_34
 # 3d_unet_ChannelAttention_flip_plus_shift_raq_FPN
 #  model: models_zoo.segmentation.pspnet.PSPNet
-  model: models_zoo.segmentation.unet.UNet
+  model: models_zoo.classification.resnet.resnet34
 #  model: models_zoo.segmentation.unet3d.Modified3DUNet
   model_params: {
 #    num_filters: 16
 #    pretrained: False
-    n_classes: 1}
-  loss: losses.LossBinaryDice
+#    n_classes: 2
+    num_classes: 1}
+  loss: losses.BCE
+#   loss: losses.CrossEntropyLoss
   loss_params: {}
-  metrics: [metrics.Dice]
+  metrics: [metrics.Binary_Accuracy, metrics.roc_auc_compute_fn]
   steps_per_epoch: 2500
   new_save: True
 #  weights: ../weights/Unet3d_organ_23_06/0/tt_2_0.09316.pt

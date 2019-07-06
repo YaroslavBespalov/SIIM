@@ -5,6 +5,16 @@ from torch.autograd import Variable
 import numpy as np
 import pydoc
 
+class BCE(nn.Module):
+    def __init__(self, weight=None, size_average=True):
+        super(BCE, self).__init__()
+        self.loss = nn.BCELoss(weight, size_average)
+
+    def forward(self, logits, targets):
+        m = nn.Sigmoid()
+        targets = targets.float().view(-1)
+        return self.loss(m(logits), targets)
+
 
 class CrossEntropyLoss(nn.Module):
     def __init__(self, weight=None, size_average=True):

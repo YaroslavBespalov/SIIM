@@ -5,12 +5,18 @@ import pandas as pd
 import numpy as np
 from pathlib import Path
 from torch.utils.data import Dataset, DataLoader
+from prefetch_generator import BackgroundGenerator
 from youtrain.factory import DataFactory
 from transforms import test_transform, mix_transform
 import pydicom
+
 import torchvision
 import copy
 
+class DataLoaderX(DataLoader):
+
+    def __iter__(self):
+        return BackgroundGenerator(super().__iter__())
 
 def rle2mask(rle, width, height):
     mask = np.zeros(width * height)
@@ -62,14 +68,18 @@ class TrainDataset(BaseDataset):
         # image = dict_trasnformns['image']
         # rle_mask = dict_trasnformns['mask']
         # return {"image": torchvision.transforms.ToTensor()(image), "mask": torchvision.transforms.ToTensor()(rle_mask)}
-
-        dict_transfors = self.transform(image=image[:,:,None], mask=rle_mask[:,:,None])
-        image = dict_transfors['image'] #.permute(2,0,1)
-        rle_mask = dict_transfors['mask']/255 #.permute(2, 0, 1)
+#SEGMENTATION
+        # dict_transfors = self.transform(image=image[:,:,None], mask=rle_mask[:,:,None])
+        # image = dict_transfors['image'] #.permute(2,0,1)
+        # rle_mask = dict_transfors['mask'] #.permute(2, 0, 1)
+# CLASSIFICATION
+        dict_trasnformns = self.transform(image=image[:,:,None], mask=image[:,:,None])
+        image = dict_trasnformns['image']
+        label = self.csv_file['label'].values[index]
 
         #print("Image None Shape",image.shape)
        # print("Mask None Shape", rle_mask.shape)
-        return {"image":image, "mask":rle_mask}
+        return {"image":image, "mask":label}
 
     def __len__(self):
         return len(self.csv_file)

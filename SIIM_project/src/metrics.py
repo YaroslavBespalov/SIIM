@@ -3,6 +3,7 @@ from torch.autograd import Variable
 import torch.nn as nn
 from albumentations import *
 import torch
+from sklearn.metrics import roc_auc_score
 import pandas as pd
 from scipy.ndimage import label
 
@@ -83,3 +84,27 @@ class LossMultiLabelDice(nn.Module):
         if self.dice_weight:
             loss += self.dice_weight * self.dice_coef_multilabel(outputs, targets)
         return loss
+
+class Accuracy(nn.Module):
+    def __init__(self, ):
+        super(Accuracy, self).__init__()
+
+    def forward(self, prediction, target):
+        return (prediction.argmax(dim=1, keepdim=True) == target).float().mean()
+
+class Binary_Accuracy(nn.Module):
+    def __init__(self, ):
+        super(Binary_Accuracy, self).__init__()
+
+    def forward(self, prediction, target, treshold=0.5):
+        prediction = (prediction > treshold).float()
+        return (prediction == target.float()).float().mean()
+
+class roc_auc_compute_fn(nn.Module):
+    def __init__(self, ):
+        super(roc_auc_compute_fn, self).__init__()
+
+    def forward(self, prediction, target):
+        y_true = target.detach().cpu().numpy()
+        y_pred = prediction.detach().cpu().numpy()
+        return roc_auc_score(y_true, y_pred)
