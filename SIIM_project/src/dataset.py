@@ -58,20 +58,19 @@ class TrainDataset(BaseDataset):
             rle_mask = rle2mask(RLE_mask[1:], 1024, 1024).T
         else:
             rle_mask = np.zeros((1024, 1024))
+        # dict_trasnformns = self.transform(image=image, mask=rle_mask)
+        # image = dict_trasnformns['image']
+        # rle_mask = dict_trasnformns['mask']
+        # return {"image": torchvision.transforms.ToTensor()(image), "mask": torchvision.transforms.ToTensor()(rle_mask)}
 
-        # if self.transform is not None:
-        #     image = self.transform(image)
-        #     rle_mask = self.transform(rle_mask)
+        dict_transfors = self.transform(image=image[:,:,None], mask=rle_mask[:,:,None])
+        image = dict_transfors['image'] #.permute(2,0,1)
+        rle_mask = dict_transfors['mask']/255 #.permute(2, 0, 1)
 
-        #  image = torchvision.transforms.ToTensor()(image)
-        #   rle_mask = torchvision.transforms.ToTensor()(rle_mask)
-        #dict_trasnformns = self.transform(image=image, mask=rle_mask)
-        #image = dict_trasnformns['image']
-        #rle_mask = dict_trasnformns['mask']
-        #return {"image": torchvision.transforms.ToTensor()(image), "mask": torchvision.transforms.ToTensor()(rle_mask)}
-        print("Image None Shape",image[None].shape)
-        print("Mask None Shape", rle_mask[None].shape)
-        return self.transform(image=image[None], mask=rle_mask[None])
+        #print("Image None Shape",image.shape)
+       # print("Mask None Shape", rle_mask.shape)
+        return {"image":image, "mask":rle_mask}
+
     def __len__(self):
         return len(self.csv_file)
 
