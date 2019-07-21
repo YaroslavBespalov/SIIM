@@ -1,0 +1,41 @@
+data_params:
+  batch_size: 64
+  num_workers: 12
+  augmentation_params: {
+    pre_resize_size: 288,
+    mix_hflip: 0.5,
+  }
+
+train_params:
+  name: classificator_resnet18
+# 3d_unet_ChannelAttention_flip_plus_shift_raq_FPN
+#  model: models_zoo.segmentation.pspnet.PSPNet
+#  model: models_zoo.segmentation.pspnet.PSPNet
+#  model: models_zoo.segmentation.unet3d.Modified3DUNet
+  model: models_zoo.classification.resnet.resnet18
+  model_params: {
+#    num_filters: 16
+#    pretrained: False
+    linear_layer_input: 4608,
+    in_channels: 1,
+    num_classes: 2}
+  loss: losses.CrossEntropyLoss
+  loss_params: {}
+  metrics: [metrics.Accuracy10, metrics.Accuracy50, metrics.Accuracy90, metrics.roc_auc_compute_fn]
+  steps_per_epoch: 2500
+  new_save: True
+#  weights: ../weights/Unet3d_organ_23_06/0/tt_2_0.09316.pt
+stages:
+-
+  load_best: False
+  optimizer: SGD
+  optimizer_params:
+    lr: 0.3
+  scheduler: ReduceLROnPlateau
+  scheduler_params:
+    patience: 5
+    factor: 0.5
+    min_lr: 0.000001
+    verbose: True
+  epochs: 500
+  augmentation: mix_transform

@@ -1,14 +1,17 @@
 data_params:
-  batch_size: 4
+  batch_size: 32
   num_workers: 16
-  augmentation_params:
-    resize: 224
+  augmentation_params: {
+    pre_resize_size: 224,
+    mix_hflip: 0.5,
+  }
+
 
 train_params:
-  name: Unet3d_organ_26_06_SGD
+  name: PSPNet
 # 3d_unet_ChannelAttention_flip_plus_shift_raq_FPN
 #  model: models_zoo.segmentation.pspnet.PSPNet
-  model: models_zoo.segmentation.unet.UNet
+  model: models_zoo.segmentation.pspnet.PSPNet
 #  model: models_zoo.segmentation.unet3d.Modified3DUNet
   model_params: {
 #    num_filters: 16
@@ -25,10 +28,10 @@ stages:
   load_best: False
   optimizer: SGD
   optimizer_params:
-    lr: 0.0003
+    lr: 0.5
   scheduler: ReduceLROnPlateau
   scheduler_params:
-    patience: 15
+    patience: 5
     factor: 0.5
     min_lr: 0.000001
     verbose: True

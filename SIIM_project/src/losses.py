@@ -15,6 +15,16 @@ class CrossEntropyLoss(nn.Module):
         targets = targets.type(torch.cuda.LongTensor).view(-1)
         return self.loss(logits, targets)
 
+class BCE(nn.Module):
+    def __init__(self, weight=None, size_average=True):
+        super(BCE, self).__init__()
+        self.loss = nn.BCELoss(weight, size_average)
+
+    def forward(self, logits, targets):
+        m = nn.Sigmoid()
+        targets = targets.float().view(-1)
+        return self.loss(m(logits), targets)
+
 
 class BCELoss2d(nn.Module):
     def __init__(self, weight=None, size_average=True):

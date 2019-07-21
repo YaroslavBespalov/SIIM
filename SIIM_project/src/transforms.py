@@ -10,34 +10,33 @@ from imgaug import augmenters as iaa
 from scipy.ndimage import label
 
 
-def pre_transform(resize):
-    transforms = []
-    transforms.append(Resize(resize, resize))
-    return Compose(transforms)
+def pre_transform(**kwargs):
+    return Compose([Resize(height=kwargs['pre_resize_size'], width=kwargs['pre_resize_size']),
+                    ])
 
-def post_transform():
+def post_transform(**kwargs):
     return Compose([
-        Normalize(
-            mean=(0.485),
-            std=(0.229)),
-        #ToTensor()
+        # Normalize(
+        #     mean=(0.485),
+        #     std=(0.229)),
+        ToTensor()
     ])
 
 
-def mix_transform(resize):
+def mix_transform(**kwargs):
     return Compose([
-        pre_transform(resize=resize),
+        pre_transform(**kwargs),
         #Rotate(limit=10, interpolation=cv2.INTER_LINEAR),
        # IAAAdditiveGaussianNoise(p=0.25),
        # VerticalFlip(),
-       # HorizontalFlip(),
+       HorizontalFlip(p=kwargs['mix_hflip']),
       #  RandomGamma(),
       #  RandomRotate90(),
-        post_transform()
+        post_transform(**kwargs)
     ])
 
-def test_transform(resize):
+def test_transform(**kwargs):
     return Compose([
-        pre_transform(resize=resize),
+        pre_transform(**kwargs),
         post_transform()]
     )

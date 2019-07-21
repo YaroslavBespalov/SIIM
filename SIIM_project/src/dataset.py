@@ -50,41 +50,42 @@ class TrainDataset(BaseDataset):
         self.transform = transform
 
     def __getitem__(self, index):
-
         name = self.csv_file.iloc[index].ImageId
         image = pydicom.dcmread(os.path.join(self.path, name + '.dcm')).pixel_array
+        label = self.csv_file.iloc[index].label
         RLE_mask = self.csv_file.loc[self.csv_file['ImageId'] == name][" EncodedPixels"].values[0]
-        if RLE_mask.strip() != str(-1):
-            rle_mask = rle2mask(RLE_mask[1:], 1024, 1024).T
-        else:
-            rle_mask = np.zeros((1024, 1024))
+        #
+        # if RLE_mask.strip() != str(-1):
+        #     rle_mask = rle2mask(RLE_mask[1:], 1024, 1024).T
+        # else:
+        #     rle_mask = np.zeros((1024, 1024))
 
-        # if self.transform is not None:
-        #     image = self.transform(image)
-        #     rle_mask = self.transform(rle_mask)
-
-        #  image = torchvision.transforms.ToTensor()(image)
-        #   rle_mask = torchvision.transforms.ToTensor()(rle_mask)
-        dict_trasnformns = self.transform(image=image, mask=rle_mask)
+        # dict_trasnformns = self.transform(image=image[:, :, None], mask=rle_mask)
+        dict_trasnformns = self.transform(image=image[:, :, None])
         image = dict_trasnformns['image']
-        rle_mask = dict_trasnformns['mask']
-        return {"image": torchvision.transforms.ToTensor()(image), "mask": torchvision.transforms.ToTensor()(rle_mask)}
+        # rle_mask = dict_trasnformns['mask']
+
+        # return {"image": image, "mask": rle_mask}
+        return {"image": image, "mask": label}
 
     def __len__(self):
         return len(self.csv_file)
 
 
 class TestDataset(BaseDataset):
-    def __init__(self, image_dir, ids, transform):
-        super().__init__(image_dir, ids, transform)
-        self.transform = transform
-        self.ids = ids
-        self.image_dir = image_dir
+    def __init__(self, path, image_csv, transform):
+        super().__init__(image_csv, transform)
+        self.path = path
+        self.folds = image_csv
+        self.csv_file = image_csv
 
     def __getitem__(self, index):
-        name = self.ids[index]
-        image = cv2.imread(os.path.join(self.image_dir, name))
-        return self.transform(image=image)['image']
+        name = self.csv_file.iloc[index].ImageId
+        image = pydicom.dcmread(os.path.join(self.path, name + '.dcm')).pixel_array
+        return self.transform(image=image[:, :, None])['image']
+
+    def __len__(self):
+        return len(self.csv_file)
 
 
 class TaskDataFactory(DataFactory):

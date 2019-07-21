@@ -1,0 +1,32 @@
+[2019-06-30 23:39:33,157] Starting training with params:
+{'name': 'PSPNet/0', 'model': 'models_zoo.segmentation.pspnet.PSPNet', 'model_params': {'n_classes': 1}, 'loss': 'losses.LossBinaryDice', 'loss_params': {}, 'metrics': ['metrics.Dice'], 'steps_per_epoch': 2500, 'new_save': True, 'name_save': 'tt_1', 'save_dir': PosixPath('../weights/PSPNet/0')}
+
+
+[2019-06-30 23:39:33,238] Starting stage:
+{'load_best': False, 'optimizer': 'SGD', 'optimizer_params': {'lr': 0.5}, 'scheduler': 'ReduceLROnPlateau', 'scheduler_params': {'patience': 5, 'factor': 0.5, 'min_lr': 1e-06, 'verbose': True}, 'epochs': 500, 'augmentation': 'mix_transform'}
+
+[2019-06-30 23:39:33,239] Epoch 0 | optimizer "SGD" | lr 0.5
+[2019-06-30 23:40:23,261] Starting training with params:
+{'name': 'PSPNet/0', 'model': 'models_zoo.segmentation.pspnet.PSPNet', 'model_params': {'n_classes': 1}, 'loss': 'losses.LossBinaryDice', 'loss_params': {}, 'metrics': ['metrics.Dice'], 'steps_per_epoch': 2500, 'new_save': True, 'name_save': 'tt_1', 'save_dir': PosixPath('../weights/PSPNet/0')}
+
+
+[2019-06-30 23:40:23,333] Starting stage:
+{'load_best': False, 'optimizer': 'SGD', 'optimizer_params': {'lr': 0.5}, 'scheduler': 'ReduceLROnPlateau', 'scheduler_params': {'patience': 5, 'factor': 0.5, 'min_lr': 1e-06, 'verbose': True}, 'epochs': 500, 'augmentation': 'mix_transform'}
+
+[2019-06-30 23:40:23,345] Epoch 0 | optimizer "SGD" | lr 0.5
+[2019-07-17 23:05:22,193] Starting training with params:
+{'name': 'PSPNet/0', 'model': 'models_zoo.segmentation.pspnet.PSPNet', 'model_params': {'n_classes': 1}, 'loss': 'losses.LossBinaryDice', 'loss_params': {}, 'metrics': ['metrics.Dice'], 'steps_per_epoch': 2500, 'new_save': True, 'name_save': 'tt_1', 'save_dir': PosixPath('../weights/PSPNet/0')}
+
+
+[2019-07-17 23:05:22,288] Starting stage:
+{'load_best': False, 'optimizer': 'SGD', 'optimizer_params': {'lr': 0.5}, 'scheduler': 'ReduceLROnPlateau', 'scheduler_params': {'patience': 5, 'factor': 0.5, 'min_lr': 1e-06, 'verbose': True}, 'epochs': 500, 'augmentation': 'mix_transform'}
+
+[2019-07-17 23:05:22,288] Epoch 0 | optimizer "SGD" | lr 0.5
+[2019-07-17 23:34:53,414] Starting training with params:
+{'name': 'PSPNet/0', 'model': 'models_zoo.segmentation.pspnet.PSPNet', 'model_params': {'n_classes': 1}, 'loss': 'losses.LossBinaryDice', 'loss_params': {}, 'metrics': ['metrics.Dice'], 'steps_per_epoch': 2500, 'new_save': True, 'name_save': 'tt_1', 'save_dir': PosixPath('../weights/PSPNet/0')}
+
+
+[2019-07-17 23:34:53,482] Starting stage:
+{'load_best': False, 'optimizer': 'SGD', 'optimizer_params': {'lr': 0.5}, 'scheduler': 'ReduceLROnPlateau', 'scheduler_params': {'patience': 5, 'factor': 0.5, 'min_lr': 1e-06, 'verbose': True}, 'epochs': 500, 'augmentation': 'mix_transform'}
+
+[2019-07-17 23:34:53,482] Epoch 0 | optimizer "SGD" | lr 0.5

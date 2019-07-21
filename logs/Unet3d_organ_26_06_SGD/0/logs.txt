@@ -1,0 +1,280 @@
+[2019-06-30 17:07:44,951] Starting training with params:
+{'name': 'Unet3d_organ_26_06_SGD/0', 'model': 'models_zoo.segmentation.unet.UNet', 'model_params': {'n_classes': 1}, 'loss': 'losses.LossBinaryDice', 'loss_params': {}, 'metrics': ['metrics.Dice'], 'steps_per_epoch': 2500, 'new_save': True, 'name_save': 'tt_1', 'save_dir': PosixPath('../weights/Unet3d_organ_26_06_SGD/0')}
+
+
+[2019-06-30 17:08:41,260] Starting training with params:
+{'name': 'Unet3d_organ_26_06_SGD/0', 'model': 'models_zoo.segmentation.unet.UNet', 'model_params': {'n_classes': 1}, 'loss': 'losses.LossBinaryDice', 'loss_params': {}, 'metrics': ['metrics.Dice'], 'steps_per_epoch': 2500, 'new_save': True, 'name_save': 'tt_1', 'save_dir': PosixPath('../weights/Unet3d_organ_26_06_SGD/0')}
+
+
+[2019-06-30 17:12:08,420] Starting training with params:
+{'name': 'Unet3d_organ_26_06_SGD/0', 'model': 'models_zoo.segmentation.unet.UNet', 'model_params': {'n_classes': 1}, 'loss': 'losses.LossBinaryDice', 'loss_params': {}, 'metrics': ['metrics.Dice'], 'steps_per_epoch': 2500, 'new_save': True, 'name_save': 'tt_1', 'save_dir': PosixPath('../weights/Unet3d_organ_26_06_SGD/0')}
+
+
+[2019-06-30 17:12:21,760] Starting training with params:
+{'name': 'Unet3d_organ_26_06_SGD/0', 'model': 'models_zoo.segmentation.unet.UNet', 'model_params': {'n_classes': 1}, 'loss': 'losses.LossBinaryDice', 'loss_params': {}, 'metrics': ['metrics.Dice'], 'steps_per_epoch': 2500, 'new_save': True, 'name_save': 'tt_1', 'save_dir': PosixPath('../weights/Unet3d_organ_26_06_SGD/0')}
+
+
+[2019-06-30 17:13:03,088] Starting training with params:
+{'name': 'Unet3d_organ_26_06_SGD/0', 'model': 'models_zoo.segmentation.unet.UNet', 'model_params': {'n_classes': 1}, 'loss': 'losses.LossBinaryDice', 'loss_params': {}, 'metrics': ['metrics.Dice'], 'steps_per_epoch': 2500, 'new_save': True, 'name_save': 'tt_1', 'save_dir': PosixPath('../weights/Unet3d_organ_26_06_SGD/0')}
+
+
+[2019-06-30 17:13:56,827] Starting training with params:
+{'name': 'Unet3d_organ_26_06_SGD/0', 'model': 'models_zoo.segmentation.unet.UNet', 'model_params': {'n_classes': 1}, 'loss': 'losses.LossBinaryDice', 'loss_params': {}, 'metrics': ['metrics.Dice'], 'steps_per_epoch': 2500, 'new_save': True, 'name_save': 'tt_1', 'save_dir': PosixPath('../weights/Unet3d_organ_26_06_SGD/0')}
+
+
+[2019-06-30 17:14:31,121] Starting training with params:
+{'name': 'Unet3d_organ_26_06_SGD/0', 'model': 'models_zoo.segmentation.unet.UNet', 'model_params': {'n_classes': 1}, 'loss': 'losses.LossBinaryDice', 'loss_params': {}, 'metrics': ['metrics.Dice'], 'steps_per_epoch': 2500, 'new_save': True, 'name_save': 'tt_1', 'save_dir': PosixPath('../weights/Unet3d_organ_26_06_SGD/0')}
+
+
+[2019-06-30 17:14:31,183] Starting stage:
+{'load_best': False, 'optimizer': 'SGD', 'optimizer_params': {'lr': 0.0003}, 'scheduler': 'ReduceLROnPlateau', 'scheduler_params': {'patience': 15, 'factor': 0.5, 'min_lr': 1e-06, 'verbose': True}, 'epochs': 500, 'augmentation': 'mix_transform'}
+
+[2019-06-30 17:14:31,183] Epoch 0 | optimizer "SGD" | lr 0.0003
+[2019-06-30 17:14:52,903] Starting training with params:
+{'name': 'Unet3d_organ_26_06_SGD/0', 'model': 'models_zoo.segmentation.unet.UNet', 'model_params': {'n_classes': 1}, 'loss': 'losses.LossBinaryDice', 'loss_params': {}, 'metrics': ['metrics.Dice'], 'steps_per_epoch': 2500, 'new_save': True, 'name_save': 'tt_1', 'save_dir': PosixPath('../weights/Unet3d_organ_26_06_SGD/0')}
+
+
+[2019-06-30 17:14:52,970] Starting stage:
+{'load_best': False, 'optimizer': 'SGD', 'optimizer_params': {'lr': 0.0003}, 'scheduler': 'ReduceLROnPlateau', 'scheduler_params': {'patience': 15, 'factor': 0.5, 'min_lr': 1e-06, 'verbose': True}, 'epochs': 500, 'augmentation': 'mix_transform'}
+
+[2019-06-30 17:14:52,970] Epoch 0 | optimizer "SGD" | lr 0.0003
+[2019-06-30 17:15:43,053] Starting training with params:
+{'name': 'Unet3d_organ_26_06_SGD/0', 'model': 'models_zoo.segmentation.unet.UNet', 'model_params': {'n_classes': 1}, 'loss': 'losses.LossBinaryDice', 'loss_params': {}, 'metrics': ['metrics.Dice'], 'steps_per_epoch': 2500, 'new_save': True, 'name_save': 'tt_1', 'save_dir': PosixPath('../weights/Unet3d_organ_26_06_SGD/0')}
+
+
+[2019-06-30 17:15:43,113] Starting stage:
+{'load_best': False, 'optimizer': 'SGD', 'optimizer_params': {'lr': 0.0003}, 'scheduler': 'ReduceLROnPlateau', 'scheduler_params': {'patience': 15, 'factor': 0.5, 'min_lr': 1e-06, 'verbose': True}, 'epochs': 500, 'augmentation': 'mix_transform'}
+
+[2019-06-30 17:15:43,113] Epoch 0 | optimizer "SGD" | lr 0.0003
+[2019-06-30 17:16:37,983] Starting training with params:
+{'name': 'Unet3d_organ_26_06_SGD/0', 'model': 'models_zoo.segmentation.unet.UNet', 'model_params': {'n_classes': 1}, 'loss': 'losses.LossBinaryDice', 'loss_params': {}, 'metrics': ['metrics.Dice'], 'steps_per_epoch': 2500, 'new_save': True, 'name_save': 'tt_1', 'save_dir': PosixPath('../weights/Unet3d_organ_26_06_SGD/0')}
+
+
+[2019-06-30 17:16:38,043] Starting stage:
+{'load_best': False, 'optimizer': 'SGD', 'optimizer_params': {'lr': 0.0003}, 'scheduler': 'ReduceLROnPlateau', 'scheduler_params': {'patience': 15, 'factor': 0.5, 'min_lr': 1e-06, 'verbose': True}, 'epochs': 500, 'augmentation': 'mix_transform'}
+
+[2019-06-30 17:16:38,043] Epoch 0 | optimizer "SGD" | lr 0.0003
+[2019-06-30 17:17:28,673] Starting training with params:
+{'name': 'Unet3d_organ_26_06_SGD/0', 'model': 'models_zoo.segmentation.unet.UNet', 'model_params': {'n_classes': 1}, 'loss': 'losses.LossBinaryDice', 'loss_params': {}, 'metrics': ['metrics.Dice'], 'steps_per_epoch': 2500, 'new_save': True, 'name_save': 'tt_1', 'save_dir': PosixPath('../weights/Unet3d_organ_26_06_SGD/0')}
+
+
+[2019-06-30 17:17:28,732] Starting stage:
+{'load_best': False, 'optimizer': 'SGD', 'optimizer_params': {'lr': 0.0003}, 'scheduler': 'ReduceLROnPlateau', 'scheduler_params': {'patience': 15, 'factor': 0.5, 'min_lr': 1e-06, 'verbose': True}, 'epochs': 500, 'augmentation': 'mix_transform'}
+
+[2019-06-30 17:17:28,732] Epoch 0 | optimizer "SGD" | lr 0.0003
+[2019-06-30 17:20:34,700] Starting training with params:
+{'name': 'Unet3d_organ_26_06_SGD/0', 'model': 'models_zoo.segmentation.unet.UNet', 'model_params': {'n_classes': 1}, 'loss': 'losses.LossBinaryDice', 'loss_params': {}, 'metrics': ['metrics.Dice'], 'steps_per_epoch': 2500, 'new_save': True, 'name_save': 'tt_1', 'save_dir': PosixPath('../weights/Unet3d_organ_26_06_SGD/0')}
+
+
+[2019-06-30 17:20:34,759] Starting stage:
+{'load_best': False, 'optimizer': 'SGD', 'optimizer_params': {'lr': 0.0003}, 'scheduler': 'ReduceLROnPlateau', 'scheduler_params': {'patience': 15, 'factor': 0.5, 'min_lr': 1e-06, 'verbose': True}, 'epochs': 500, 'augmentation': 'mix_transform'}
+
+[2019-06-30 17:20:34,759] Epoch 0 | optimizer "SGD" | lr 0.0003
+[2019-06-30 17:27:58,630] Starting training with params:
+{'name': 'Unet3d_organ_26_06_SGD/0', 'model': 'models_zoo.segmentation.unet.UNet', 'model_params': {'n_classes': 1}, 'loss': 'losses.LossBinaryDice', 'loss_params': {}, 'metrics': ['metrics.Dice'], 'steps_per_epoch': 2500, 'new_save': True, 'name_save': 'tt_1', 'save_dir': PosixPath('../weights/Unet3d_organ_26_06_SGD/0')}
+
+
+[2019-06-30 17:27:58,690] Starting stage:
+{'load_best': False, 'optimizer': 'SGD', 'optimizer_params': {'lr': 0.0003}, 'scheduler': 'ReduceLROnPlateau', 'scheduler_params': {'patience': 15, 'factor': 0.5, 'min_lr': 1e-06, 'verbose': True}, 'epochs': 500, 'augmentation': 'mix_transform'}
+
+[2019-06-30 17:27:58,690] Epoch 0 | optimizer "SGD" | lr 0.0003
+[2019-06-30 17:28:21,339] Starting training with params:
+{'name': 'Unet3d_organ_26_06_SGD/0', 'model': 'models_zoo.segmentation.unet.UNet', 'model_params': {'n_classes': 1}, 'loss': 'losses.LossBinaryDice', 'loss_params': {}, 'metrics': ['metrics.Dice'], 'steps_per_epoch': 2500, 'new_save': True, 'name_save': 'tt_1', 'save_dir': PosixPath('../weights/Unet3d_organ_26_06_SGD/0')}
+
+
+[2019-06-30 17:28:21,402] Starting stage:
+{'load_best': False, 'optimizer': 'SGD', 'optimizer_params': {'lr': 0.0003}, 'scheduler': 'ReduceLROnPlateau', 'scheduler_params': {'patience': 15, 'factor': 0.5, 'min_lr': 1e-06, 'verbose': True}, 'epochs': 500, 'augmentation': 'mix_transform'}
+
+[2019-06-30 17:28:21,402] Epoch 0 | optimizer "SGD" | lr 0.0003
+[2019-06-30 17:36:19,697] Starting training with params:
+{'name': 'Unet3d_organ_26_06_SGD/0', 'model': 'models_zoo.segmentation.unet.UNet', 'model_params': {'n_classes': 1}, 'loss': 'losses.LossBinaryDice', 'loss_params': {}, 'metrics': ['metrics.Dice'], 'steps_per_epoch': 2500, 'new_save': True, 'name_save': 'tt_1', 'save_dir': PosixPath('../weights/Unet3d_organ_26_06_SGD/0')}
+
+
+[2019-06-30 17:36:19,760] Starting stage:
+{'load_best': False, 'optimizer': 'SGD', 'optimizer_params': {'lr': 0.0003}, 'scheduler': 'ReduceLROnPlateau', 'scheduler_params': {'patience': 15, 'factor': 0.5, 'min_lr': 1e-06, 'verbose': True}, 'epochs': 500, 'augmentation': 'mix_transform'}
+
+[2019-06-30 17:36:19,761] Epoch 0 | optimizer "SGD" | lr 0.0003
+[2019-06-30 17:39:38,613] Starting training with params:
+{'name': 'Unet3d_organ_26_06_SGD/0', 'model': 'models_zoo.segmentation.unet.UNet', 'model_params': {'n_classes': 1}, 'loss': 'losses.LossBinaryDice', 'loss_params': {}, 'metrics': ['metrics.Dice'], 'steps_per_epoch': 2500, 'new_save': True, 'name_save': 'tt_1', 'save_dir': PosixPath('../weights/Unet3d_organ_26_06_SGD/0')}
+
+
+[2019-06-30 17:39:38,676] Starting stage:
+{'load_best': False, 'optimizer': 'SGD', 'optimizer_params': {'lr': 0.0003}, 'scheduler': 'ReduceLROnPlateau', 'scheduler_params': {'patience': 15, 'factor': 0.5, 'min_lr': 1e-06, 'verbose': True}, 'epochs': 500, 'augmentation': 'mix_transform'}
+
+[2019-06-30 17:39:38,676] Epoch 0 | optimizer "SGD" | lr 0.0003
+[2019-06-30 17:40:53,048] Starting training with params:
+{'name': 'Unet3d_organ_26_06_SGD/0', 'model': 'models_zoo.segmentation.unet.UNet', 'model_params': {'n_classes': 1}, 'loss': 'losses.LossBinaryDice', 'loss_params': {}, 'metrics': ['metrics.Dice'], 'steps_per_epoch': 2500, 'new_save': True, 'name_save': 'tt_1', 'save_dir': PosixPath('../weights/Unet3d_organ_26_06_SGD/0')}
+
+
+[2019-06-30 17:40:53,111] Starting stage:
+{'load_best': False, 'optimizer': 'SGD', 'optimizer_params': {'lr': 0.0003}, 'scheduler': 'ReduceLROnPlateau', 'scheduler_params': {'patience': 15, 'factor': 0.5, 'min_lr': 1e-06, 'verbose': True}, 'epochs': 500, 'augmentation': 'mix_transform'}
+
+[2019-06-30 17:40:53,111] Epoch 0 | optimizer "SGD" | lr 0.0003
+[2019-06-30 17:43:13,913] Starting training with params:
+{'name': 'Unet3d_organ_26_06_SGD/0', 'model': 'models_zoo.segmentation.unet.UNet', 'model_params': {'n_classes': 1}, 'loss': 'losses.LossBinaryDice', 'loss_params': {}, 'metrics': ['metrics.Dice'], 'steps_per_epoch': 2500, 'new_save': True, 'name_save': 'tt_1', 'save_dir': PosixPath('../weights/Unet3d_organ_26_06_SGD/0')}
+
+
+[2019-06-30 17:43:13,976] Starting stage:
+{'load_best': False, 'optimizer': 'SGD', 'optimizer_params': {'lr': 0.0003}, 'scheduler': 'ReduceLROnPlateau', 'scheduler_params': {'patience': 15, 'factor': 0.5, 'min_lr': 1e-06, 'verbose': True}, 'epochs': 500, 'augmentation': 'mix_transform'}
+
+[2019-06-30 17:43:13,976] Epoch 0 | optimizer "SGD" | lr 0.0003
+[2019-06-30 17:45:20,919] Starting training with params:
+{'name': 'Unet3d_organ_26_06_SGD/0', 'model': 'models_zoo.segmentation.unet.UNet', 'model_params': {'n_classes': 1}, 'loss': 'losses.LossBinaryDice', 'loss_params': {}, 'metrics': ['metrics.Dice'], 'steps_per_epoch': 2500, 'new_save': True, 'name_save': 'tt_1', 'save_dir': PosixPath('../weights/Unet3d_organ_26_06_SGD/0')}
+
+
+[2019-06-30 17:45:20,980] Starting stage:
+{'load_best': False, 'optimizer': 'SGD', 'optimizer_params': {'lr': 0.0003}, 'scheduler': 'ReduceLROnPlateau', 'scheduler_params': {'patience': 15, 'factor': 0.5, 'min_lr': 1e-06, 'verbose': True}, 'epochs': 500, 'augmentation': 'mix_transform'}
+
+[2019-06-30 17:45:20,980] Epoch 0 | optimizer "SGD" | lr 0.0003
+[2019-06-30 17:47:32,255] Starting training with params:
+{'name': 'Unet3d_organ_26_06_SGD/0', 'model': 'models_zoo.segmentation.unet.UNet', 'model_params': {'n_classes': 1}, 'loss': 'losses.LossBinaryDice', 'loss_params': {}, 'metrics': ['metrics.Dice'], 'steps_per_epoch': 2500, 'new_save': True, 'name_save': 'tt_1', 'save_dir': PosixPath('../weights/Unet3d_organ_26_06_SGD/0')}
+
+
+[2019-06-30 17:47:32,320] Starting stage:
+{'load_best': False, 'optimizer': 'SGD', 'optimizer_params': {'lr': 0.0003}, 'scheduler': 'ReduceLROnPlateau', 'scheduler_params': {'patience': 15, 'factor': 0.5, 'min_lr': 1e-06, 'verbose': True}, 'epochs': 500, 'augmentation': 'mix_transform'}
+
+[2019-06-30 17:47:32,320] Epoch 0 | optimizer "SGD" | lr 0.0003
+[2019-06-30 17:48:10,876] Starting training with params:
+{'name': 'Unet3d_organ_26_06_SGD/0', 'model': 'models_zoo.segmentation.unet.UNet', 'model_params': {'n_classes': 1}, 'loss': 'losses.LossBinaryDice', 'loss_params': {}, 'metrics': ['metrics.Dice'], 'steps_per_epoch': 2500, 'new_save': True, 'name_save': 'tt_1', 'save_dir': PosixPath('../weights/Unet3d_organ_26_06_SGD/0')}
+
+
+[2019-06-30 17:48:10,926] Starting stage:
+{'load_best': False, 'optimizer': 'SGD', 'optimizer_params': {'lr': 0.0003}, 'scheduler': 'ReduceLROnPlateau', 'scheduler_params': {'patience': 15, 'factor': 0.5, 'min_lr': 1e-06, 'verbose': True}, 'epochs': 500, 'augmentation': 'mix_transform'}
+
+[2019-06-30 17:48:10,927] Epoch 0 | optimizer "SGD" | lr 0.0003
+[2019-06-30 17:51:08,460] Starting training with params:
+{'name': 'Unet3d_organ_26_06_SGD/0', 'model': 'models_zoo.segmentation.unet.UNet', 'model_params': {'n_classes': 1}, 'loss': 'losses.LossBinaryDice', 'loss_params': {}, 'metrics': ['metrics.Dice'], 'steps_per_epoch': 2500, 'new_save': True, 'name_save': 'tt_1', 'save_dir': PosixPath('../weights/Unet3d_organ_26_06_SGD/0')}
+
+
+[2019-06-30 17:51:08,522] Starting stage:
+{'load_best': False, 'optimizer': 'SGD', 'optimizer_params': {'lr': 0.0003}, 'scheduler': 'ReduceLROnPlateau', 'scheduler_params': {'patience': 15, 'factor': 0.5, 'min_lr': 1e-06, 'verbose': True}, 'epochs': 500, 'augmentation': 'mix_transform'}
+
+[2019-06-30 17:51:08,522] Epoch 0 | optimizer "SGD" | lr 0.0003
+[2019-06-30 18:48:43,199] Starting training with params:
+{'name': 'Unet3d_organ_26_06_SGD/0', 'model': 'models_zoo.segmentation.unet.UNet', 'model_params': {'n_classes': 1}, 'loss': 'losses.LossBinaryDice', 'loss_params': {}, 'metrics': ['metrics.Dice'], 'steps_per_epoch': 2500, 'new_save': True, 'name_save': 'tt_1', 'save_dir': PosixPath('../weights/Unet3d_organ_26_06_SGD/0')}
+
+
+[2019-06-30 18:48:43,269] Starting stage:
+{'load_best': False, 'optimizer': 'SGD', 'optimizer_params': {'lr': 0.0003}, 'scheduler': 'ReduceLROnPlateau', 'scheduler_params': {'patience': 15, 'factor': 0.5, 'min_lr': 1e-06, 'verbose': True}, 'epochs': 500, 'augmentation': 'mix_transform'}
+
+[2019-06-30 18:48:43,269] Epoch 0 | optimizer "SGD" | lr 0.0003
+[2019-06-30 18:58:16,126] Starting training with params:
+{'name': 'Unet3d_organ_26_06_SGD/0', 'model': 'models_zoo.segmentation.unet.UNet', 'model_params': {'n_classes': 1}, 'loss': 'losses.LossBinaryDice', 'loss_params': {}, 'metrics': ['metrics.Dice'], 'steps_per_epoch': 2500, 'new_save': True, 'name_save': 'tt_1', 'save_dir': PosixPath('../weights/Unet3d_organ_26_06_SGD/0')}
+
+
+[2019-06-30 18:58:16,184] Starting stage:
+{'load_best': False, 'optimizer': 'SGD', 'optimizer_params': {'lr': 0.0003}, 'scheduler': 'ReduceLROnPlateau', 'scheduler_params': {'patience': 15, 'factor': 0.5, 'min_lr': 1e-06, 'verbose': True}, 'epochs': 500, 'augmentation': 'mix_transform'}
+
+[2019-06-30 18:58:16,184] Epoch 0 | optimizer "SGD" | lr 0.0003
+[2019-06-30 19:01:55,032] Starting training with params:
+{'name': 'Unet3d_organ_26_06_SGD/0', 'model': 'models_zoo.segmentation.unet.UNet', 'model_params': {'n_classes': 1}, 'loss': 'losses.LossBinaryDice', 'loss_params': {}, 'metrics': ['metrics.Dice'], 'steps_per_epoch': 2500, 'new_save': True, 'name_save': 'tt_1', 'save_dir': PosixPath('../weights/Unet3d_organ_26_06_SGD/0')}
+
+
+[2019-06-30 19:01:55,085] Starting stage:
+{'load_best': False, 'optimizer': 'SGD', 'optimizer_params': {'lr': 0.0003}, 'scheduler': 'ReduceLROnPlateau', 'scheduler_params': {'patience': 15, 'factor': 0.5, 'min_lr': 1e-06, 'verbose': True}, 'epochs': 500, 'augmentation': 'mix_transform'}
+
+[2019-06-30 19:01:55,085] Epoch 0 | optimizer "SGD" | lr 0.0003
+[2019-06-30 19:08:11,574] Starting training with params:
+{'name': 'Unet3d_organ_26_06_SGD/0', 'model': 'models_zoo.segmentation.unet.UNet', 'model_params': {'n_classes': 1}, 'loss': 'losses.LossBinaryDice', 'loss_params': {}, 'metrics': ['metrics.Dice'], 'steps_per_epoch': 2500, 'new_save': True, 'name_save': 'tt_1', 'save_dir': PosixPath('../weights/Unet3d_organ_26_06_SGD/0')}
+
+
+[2019-06-30 19:08:11,642] Starting stage:
+{'load_best': False, 'optimizer': 'SGD', 'optimizer_params': {'lr': 0.0003}, 'scheduler': 'ReduceLROnPlateau', 'scheduler_params': {'patience': 15, 'factor': 0.5, 'min_lr': 1e-06, 'verbose': True}, 'epochs': 500, 'augmentation': 'mix_transform'}
+
+[2019-06-30 19:08:11,642] Epoch 0 | optimizer "SGD" | lr 0.0003
+[2019-06-30 19:08:30,128] Starting training with params:
+{'name': 'Unet3d_organ_26_06_SGD/0', 'model': 'models_zoo.segmentation.unet.UNet', 'model_params': {'n_classes': 1}, 'loss': 'losses.LossBinaryDice', 'loss_params': {}, 'metrics': ['metrics.Dice'], 'steps_per_epoch': 2500, 'new_save': True, 'name_save': 'tt_1', 'save_dir': PosixPath('../weights/Unet3d_organ_26_06_SGD/0')}
+
+
+[2019-06-30 19:08:30,182] Starting stage:
+{'load_best': False, 'optimizer': 'SGD', 'optimizer_params': {'lr': 0.0003}, 'scheduler': 'ReduceLROnPlateau', 'scheduler_params': {'patience': 15, 'factor': 0.5, 'min_lr': 1e-06, 'verbose': True}, 'epochs': 500, 'augmentation': 'mix_transform'}
+
+[2019-06-30 19:08:30,182] Epoch 0 | optimizer "SGD" | lr 0.0003
+[2019-06-30 19:09:59,180] Starting training with params:
+{'name': 'Unet3d_organ_26_06_SGD/0', 'model': 'models_zoo.segmentation.unet.UNet', 'model_params': {'n_classes': 1}, 'loss': 'losses.LossBinaryDice', 'loss_params': {}, 'metrics': ['metrics.Dice'], 'steps_per_epoch': 2500, 'new_save': True, 'name_save': 'tt_1', 'save_dir': PosixPath('../weights/Unet3d_organ_26_06_SGD/0')}
+
+
+[2019-06-30 19:09:59,231] Starting stage:
+{'load_best': False, 'optimizer': 'SGD', 'optimizer_params': {'lr': 0.0003}, 'scheduler': 'ReduceLROnPlateau', 'scheduler_params': {'patience': 15, 'factor': 0.5, 'min_lr': 1e-06, 'verbose': True}, 'epochs': 500, 'augmentation': 'mix_transform'}
+
+[2019-06-30 19:09:59,231] Epoch 0 | optimizer "SGD" | lr 0.0003
+[2019-06-30 19:11:41,170] Starting training with params:
+{'name': 'Unet3d_organ_26_06_SGD/0', 'model': 'models_zoo.segmentation.unet.UNet', 'model_params': {'n_classes': 1}, 'loss': 'losses.LossBinaryDice', 'loss_params': {}, 'metrics': ['metrics.Dice'], 'steps_per_epoch': 2500, 'new_save': True, 'name_save': 'tt_1', 'save_dir': PosixPath('../weights/Unet3d_organ_26_06_SGD/0')}
+
+
+[2019-06-30 19:11:41,221] Starting stage:
+{'load_best': False, 'optimizer': 'SGD', 'optimizer_params': {'lr': 0.0003}, 'scheduler': 'ReduceLROnPlateau', 'scheduler_params': {'patience': 15, 'factor': 0.5, 'min_lr': 1e-06, 'verbose': True}, 'epochs': 500, 'augmentation': 'mix_transform'}
+
+[2019-06-30 19:11:41,221] Epoch 0 | optimizer "SGD" | lr 0.0003
+[2019-06-30 19:18:21,454] Starting training with params:
+{'name': 'Unet3d_organ_26_06_SGD/0', 'model': 'models_zoo.segmentation.unet.UNet', 'model_params': {'n_classes': 1}, 'loss': 'losses.LossBinaryDice', 'loss_params': {}, 'metrics': ['metrics.Dice'], 'steps_per_epoch': 2500, 'new_save': True, 'name_save': 'tt_1', 'save_dir': PosixPath('../weights/Unet3d_organ_26_06_SGD/0')}
+
+
+[2019-06-30 19:18:21,505] Starting stage:
+{'load_best': False, 'optimizer': 'SGD', 'optimizer_params': {'lr': 0.0003}, 'scheduler': 'ReduceLROnPlateau', 'scheduler_params': {'patience': 15, 'factor': 0.5, 'min_lr': 1e-06, 'verbose': True}, 'epochs': 500, 'augmentation': 'mix_transform'}
+
+[2019-06-30 19:18:21,505] Epoch 0 | optimizer "SGD" | lr 0.0003
+[2019-06-30 19:24:34,405] Starting training with params:
+{'name': 'Unet3d_organ_26_06_SGD/0', 'model': 'models_zoo.segmentation.unet.UNet', 'model_params': {'n_classes': 1}, 'loss': 'losses.LossBinaryDice', 'loss_params': {}, 'metrics': ['metrics.Dice'], 'steps_per_epoch': 2500, 'new_save': True, 'name_save': 'tt_1', 'save_dir': PosixPath('../weights/Unet3d_organ_26_06_SGD/0')}
+
+
+[2019-06-30 19:24:34,458] Starting stage:
+{'load_best': False, 'optimizer': 'SGD', 'optimizer_params': {'lr': 0.0003}, 'scheduler': 'ReduceLROnPlateau', 'scheduler_params': {'patience': 15, 'factor': 0.5, 'min_lr': 1e-06, 'verbose': True}, 'epochs': 500, 'augmentation': 'mix_transform'}
+
+[2019-06-30 19:24:34,458] Epoch 0 | optimizer "SGD" | lr 0.0003
+[2019-06-30 19:27:21,063] Starting training with params:
+{'name': 'Unet3d_organ_26_06_SGD/0', 'model': 'models_zoo.segmentation.unet.UNet', 'model_params': {'n_classes': 1}, 'loss': 'losses.LossBinaryDice', 'loss_params': {}, 'metrics': ['metrics.Dice'], 'steps_per_epoch': 2500, 'new_save': True, 'name_save': 'tt_1', 'save_dir': PosixPath('../weights/Unet3d_organ_26_06_SGD/0')}
+
+
+[2019-06-30 19:27:21,118] Starting stage:
+{'load_best': False, 'optimizer': 'SGD', 'optimizer_params': {'lr': 0.0003}, 'scheduler': 'ReduceLROnPlateau', 'scheduler_params': {'patience': 15, 'factor': 0.5, 'min_lr': 1e-06, 'verbose': True}, 'epochs': 500, 'augmentation': 'mix_transform'}
+
+[2019-06-30 19:27:21,119] Epoch 0 | optimizer "SGD" | lr 0.0003
+[2019-06-30 19:27:33,834] Starting training with params:
+{'name': 'Unet3d_organ_26_06_SGD/0', 'model': 'models_zoo.segmentation.unet.UNet', 'model_params': {'n_classes': 1}, 'loss': 'losses.LossBinaryDice', 'loss_params': {}, 'metrics': ['metrics.Dice'], 'steps_per_epoch': 2500, 'new_save': True, 'name_save': 'tt_1', 'save_dir': PosixPath('../weights/Unet3d_organ_26_06_SGD/0')}
+
+
+[2019-06-30 19:27:33,890] Starting stage:
+{'load_best': False, 'optimizer': 'SGD', 'optimizer_params': {'lr': 0.0003}, 'scheduler': 'ReduceLROnPlateau', 'scheduler_params': {'patience': 15, 'factor': 0.5, 'min_lr': 1e-06, 'verbose': True}, 'epochs': 500, 'augmentation': 'mix_transform'}
+
+[2019-06-30 19:27:33,890] Epoch 0 | optimizer "SGD" | lr 0.0003
+[2019-06-30 19:28:43,680] Starting training with params:
+{'name': 'Unet3d_organ_26_06_SGD/0', 'model': 'models_zoo.segmentation.unet.UNet', 'model_params': {'n_classes': 1}, 'loss': 'losses.LossBinaryDice', 'loss_params': {}, 'metrics': ['metrics.Dice'], 'steps_per_epoch': 2500, 'new_save': True, 'name_save': 'tt_1', 'save_dir': PosixPath('../weights/Unet3d_organ_26_06_SGD/0')}
+
+
+[2019-06-30 19:28:43,731] Starting stage:
+{'load_best': False, 'optimizer': 'SGD', 'optimizer_params': {'lr': 0.0003}, 'scheduler': 'ReduceLROnPlateau', 'scheduler_params': {'patience': 15, 'factor': 0.5, 'min_lr': 1e-06, 'verbose': True}, 'epochs': 500, 'augmentation': 'mix_transform'}
+
+[2019-06-30 19:28:43,731] Epoch 0 | optimizer "SGD" | lr 0.0003
+[2019-06-30 19:29:19,227] Starting training with params:
+{'name': 'Unet3d_organ_26_06_SGD/0', 'model': 'models_zoo.segmentation.unet.UNet', 'model_params': {'n_classes': 1}, 'loss': 'losses.LossBinaryDice', 'loss_params': {}, 'metrics': ['metrics.Dice'], 'steps_per_epoch': 2500, 'new_save': True, 'name_save': 'tt_1', 'save_dir': PosixPath('../weights/Unet3d_organ_26_06_SGD/0')}
+
+
+[2019-06-30 19:29:19,280] Starting stage:
+{'load_best': False, 'optimizer': 'SGD', 'optimizer_params': {'lr': 0.0003}, 'scheduler': 'ReduceLROnPlateau', 'scheduler_params': {'patience': 15, 'factor': 0.5, 'min_lr': 1e-06, 'verbose': True}, 'epochs': 500, 'augmentation': 'mix_transform'}
+
+[2019-06-30 19:29:19,280] Epoch 0 | optimizer "SGD" | lr 0.0003
+[2019-06-30 19:30:04,726] Starting training with params:
+{'name': 'Unet3d_organ_26_06_SGD/0', 'model': 'models_zoo.segmentation.unet.UNet', 'model_params': {'n_classes': 1}, 'loss': 'losses.LossBinaryDice', 'loss_params': {}, 'metrics': ['metrics.Dice'], 'steps_per_epoch': 2500, 'new_save': True, 'name_save': 'tt_1', 'save_dir': PosixPath('../weights/Unet3d_organ_26_06_SGD/0')}
+
+
+[2019-06-30 19:30:04,777] Starting stage:
+{'load_best': False, 'optimizer': 'SGD', 'optimizer_params': {'lr': 0.0003}, 'scheduler': 'ReduceLROnPlateau', 'scheduler_params': {'patience': 15, 'factor': 0.5, 'min_lr': 1e-06, 'verbose': True}, 'epochs': 500, 'augmentation': 'mix_transform'}
+
+[2019-06-30 19:30:04,777] Epoch 0 | optimizer "SGD" | lr 0.0003
+[2019-06-30 19:30:53,559] Starting training with params:
+{'name': 'Unet3d_organ_26_06_SGD/0', 'model': 'models_zoo.segmentation.unet.UNet', 'model_params': {'n_classes': 1}, 'loss': 'losses.LossBinaryDice', 'loss_params': {}, 'metrics': ['metrics.Dice'], 'steps_per_epoch': 2500, 'new_save': True, 'name_save': 'tt_1', 'save_dir': PosixPath('../weights/Unet3d_organ_26_06_SGD/0')}
+
+
+[2019-06-30 19:30:53,613] Starting stage:
+{'load_best': False, 'optimizer': 'SGD', 'optimizer_params': {'lr': 0.0003}, 'scheduler': 'ReduceLROnPlateau', 'scheduler_params': {'patience': 15, 'factor': 0.5, 'min_lr': 1e-06, 'verbose': True}, 'epochs': 500, 'augmentation': 'mix_transform'}
+
+[2019-06-30 19:30:53,613] Epoch 0 | optimizer "SGD" | lr 0.0003
+[2019-06-30 19:31:48,899] Starting training with params:
+{'name': 'Unet3d_organ_26_06_SGD/0', 'model': 'models_zoo.segmentation.unet.UNet', 'model_params': {'n_classes': 1}, 'loss': 'losses.LossBinaryDice', 'loss_params': {}, 'metrics': ['metrics.Dice'], 'steps_per_epoch': 2500, 'new_save': True, 'name_save': 'tt_1', 'save_dir': PosixPath('../weights/Unet3d_organ_26_06_SGD/0')}
+
+
+[2019-06-30 19:31:48,961] Starting stage:
+{'load_best': False, 'optimizer': 'SGD', 'optimizer_params': {'lr': 0.0003}, 'scheduler': 'ReduceLROnPlateau', 'scheduler_params': {'patience': 15, 'factor': 0.5, 'min_lr': 1e-06, 'verbose': True}, 'epochs': 500, 'augmentation': 'mix_transform'}
+
+[2019-06-30 19:31:48,961] Epoch 0 | optimizer "SGD" | lr 0.0003

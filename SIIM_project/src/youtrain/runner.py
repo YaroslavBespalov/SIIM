@@ -1,5 +1,4 @@
 import os
-import glob
 import pydoc
 from collections import defaultdict
 from tqdm import tqdm
@@ -8,7 +7,6 @@ import torch
 import torch.nn as nn
 import numpy as np
 from torch.optim.lr_scheduler import ReduceLROnPlateau
-from torchvision import transforms
 
 tqdm.monitor_interval = 0
 
@@ -16,7 +14,7 @@ tqdm.monitor_interval = 0
 class Metrics:
     def __init__(self, functions):
         self.functions = functions
-        self.best_score = 0 #float('inf')
+        self.best_score = 0  # float('inf')
         self.best_epoch = 0
         self.train_metrics = {}
         self.val_metrics = {}
@@ -27,7 +25,6 @@ class Runner:
         self.stages = stages
         self.factory = factory
         self.device = device
-        self.RESAMPLE_SIZE = 32
         self.model = self.factory.make_model()
 
         self.model = nn.DataParallel(self.model).to(device)
@@ -49,13 +46,15 @@ class Runner:
             self.current_stage = stage
 
             if 'change_loss' in self.factory.params and self.factory.params['change_loss']:
-                self.loss = pydoc.locate(self.current_stage['loss'])(**self.current_stage['loss_params']).to(self.device)
+                self.loss = pydoc.locate(self.current_stage['loss'])(**self.current_stage['loss_params']).to(
+                    self.device)
 
             train_loader = data_factory.make_loader(stage, is_train=True)
             val_loader = data_factory.make_loader(stage, is_train=False)
 
-            if i>0 and self.current_stage['load_best']:
-                weights_path = [os.path.join(self.factory.params['save_dir'], w) for w in os.listdir(self.factory.params['save_dir']) if self.factory.params['name_save'] in w]
+            if i > 0 and self.current_stage['load_best']:
+                weights_path = [os.path.join(self.factory.params['save_dir'], w) for w in
+                                os.listdir(self.factory.params['save_dir']) if self.factory.params['name_save'] in w]
                 if len(weights_path) == 1:
                     weights_path = weights_path[0]
                     print(weights_path)
@@ -119,7 +118,11 @@ class Runner:
                 for key, value in step_report.items():
                     if isinstance(value, torch.Tensor):
                         value = value.item()
-                    epoch_report[key] += value
+                    if isinstance(value, dict):
+                        for key_v, val_v in value.items():
+                            epoch_report[key_v] += val_v
+                    else:
+                        epoch_report[key] += value
 
                 progress_bar.set_postfix(
                     **{k: "{:.5f}".format(v / (i + 1)) for k, v in epoch_report.items()})
@@ -128,47 +131,15 @@ class Runner:
                     break
         return {key: value / len_loader for key, value in epoch_report.items()}
 
-    def crop(self, img, crop_boundaries, margin=5):
-        x_min, x_max, y_min, y_max, z_min, z_max = crop_boundaries
-        return img[torch.max(0, z_min - margin):torch.min(z_max + 1 + margin, img.shape[2]),
-               torch.max(0, x_min - margin):torch.min(x_max + 1 + margin, img.shape[0]),
-               torch.max(0, y_min - margin):torch.min(y_max + 1 + margin, img.shape[0])]
-
-    def resample(self, num_slices):
-        return np.linspace(0, num_slices - 1, self.RESAMPLE_SIZE).astype(int)
-
     def _make_step(self, data, is_train):
         report = {}
         data = self.batch2device(data)
         images = data['image']
         labels = data['mask']
 
-        # tmp_img_list = []
-        # print(labels.shape)
-        # for i in labels:
-        #     print(i.shape)
-        #     resample_ids = self.resample(i.shape[1])
-        #     tmp = i[0, resample_ids, :, :]
-        #     print("tmp", tmp.shape)
-        #     qwa = []
-        #     for j in tmp:
-        #         j = transforms.ToPILImage()(j)
-        #         qwa.append(transforms.Resize((224, 224))(j))
-        #     print(len(qwa))
-        #     tmp_img = torch.stack(qwa, dim=0)
-        #     tmp_img=tmp_img[None] #[None]
-        #     print("tmp_img", tmp_img.shape)
-            #tmp_img = transforms.Resize((224, 224))(tmp[0])
-            # for slice in tmp[1:]:
-            #     tmp_img = torch.stack(tmp_img, transforms.Resize((resample_ids, 224, 224))(slice))
-            # tmp_img_list.append(tmp_img[None])
-
-        # labels = torch.Tensor(tmp_img_list)
-        
         if is_train:
             self.optimizer.zero_grad()
 
-     #   predictions, boundaries = self.model(images)
         predictions = self.model(images)
         loss = self.loss(predictions, labels)
         report['loss'] = loss.data

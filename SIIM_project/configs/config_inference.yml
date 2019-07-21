@@ -1,22 +1,22 @@
 data_params:
-  batch_size: 16
+  batch_size: 18
   num_workers: 16
   augmentation_params:
-    resize: 320
+    pre_resize_size: 288
 
 train_params:
-  name: rn18
-  model: models.MultiResnet18
-  model_params:
-    num_filters: 16
-    pretrained: True
-    num_classes: 2
+  name: classificator_shufflenetv2_inference
+  model: models_zoo.classification.shufflenet.shufflenetv2
+  model_params: {
+    in_channels: 1,
+    n_class: 2,
+    input_size: 288}
   loss: losses.BCELoss2d
   loss_params: {}
   metrics: [losses.BCELoss2d]
   steps_per_epoch: 2500
   new_save: True
-#  weights:
+  weights: ../weights/classificator_shufflenetv2/0/tt_1_0.83685.pt
 stages:
 -
   load_best: False

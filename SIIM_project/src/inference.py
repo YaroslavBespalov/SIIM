@@ -1,4 +1,6 @@
 import numpy as np
+import pandas as pd
+import os
 
 import argparse
 from pathlib import Path
@@ -9,7 +11,7 @@ import torch
 
 from tqdm import tqdm
 from dataset import TestDataset
-from inference import PytorchInference
+# from inference import PytorchInference
 from transforms import test_transform
 from torch.utils.data import DataLoader
 from youtrain.utils import set_global_seeds, get_config, get_last_save
@@ -68,8 +70,8 @@ def main():
     paths = paths['data']
 
     dataset = TestDataset(
-            image_dir=Path(paths['path']) / Path(paths['test_images']),
-            ids=None,
+            path=Path(paths['path']),
+            image_csv=pd.read_csv(os.path.join(paths['path'], paths['test_images'])),
             transform=test_transform(**config['data_params']['augmentation_params']))
 
     loader = DataLoader(
@@ -83,9 +85,15 @@ def main():
     device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
     inferencer = PytorchInference(device)
 
+    test_csv = pd.read_csv(os.path.join(paths['path'], paths['test_images']))
+    test_csv['predicted_class'] = None
+    test_csv['class_prob'] = None
+    i = 0
     for pred in tqdm(inferencer.predict(model, loader), total=len(dataset)):
-        pass
-
+        test_csv.loc[i, 'predicted_class'] = np.argmax(pred)
+        test_csv.loc[i, 'class_prob'] = pred[1]
+        i +=1
+    test_csv.to_csv(os.path.join(paths['path'], paths['test_images']), index=False)
 
 if __name__== '__main__':
     main()
