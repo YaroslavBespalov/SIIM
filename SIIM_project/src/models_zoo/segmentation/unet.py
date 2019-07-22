@@ -46,12 +46,14 @@ class down(nn.Module):
 
 
 class up(nn.Module):
-    def __init__(self, in_ch, out_ch, bilinear=True):
+    def __init__(self, in_ch, out_ch, upsampling='pixel_shuffle'):
         super(up, self).__init__()
 
         #  would be a nice idea if the upsampling could be learned too,
         #  but my machine do not have enough memory to handle all those weights
-        if bilinear:
+        if upsampling=='pixel_shuffle':
+            self.up = nn.PixelShuffle(upscale_factor=2)
+        elif upsampling=='bilinear':
             self.up = nn.Upsample(scale_factor=2, mode='bilinear', align_corners=True)
         else:
             self.up = nn.ConvTranspose2d(in_ch // 2, in_ch // 2, 2, stride=2)
@@ -88,17 +90,17 @@ class outconv(nn.Module):
 
 
 class UNet(nn.Module):
-    def __init__(self, n_channels=1, n_classes=3):
+    def __init__(self, n_channels=1, n_classes=3, upsampling='pixel_shuffle'):
         super(UNet, self).__init__()
         self.inc = inconv(n_channels, 64)
         self.down1 = down(64, 128)
         self.down2 = down(128, 256)
         self.down3 = down(256, 512)
         self.down4 = down(512, 512)
-        self.up1 = up(1024, 256)
-        self.up2 = up(512, 128)
-        self.up3 = up(256, 64)
-        self.up4 = up(128, 64)
+        self.up1 = up(1024, 256, upsampling)
+        self.up2 = up(512, 128, upsampling)
+        self.up3 = up(256, 64, upsampling)
+        self.up4 = up(128, 64, upsampling)
         self.outc = outconv(64, n_classes)
 
     def forward(self, x):

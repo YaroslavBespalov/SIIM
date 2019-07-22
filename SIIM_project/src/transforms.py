@@ -30,6 +30,12 @@ def mix_transform(**kwargs):
        # IAAAdditiveGaussianNoise(p=0.25),
        # VerticalFlip(),
        HorizontalFlip(p=kwargs['mix_hflip']),
+        RandomRotate90(),
+        VerticalFlip(),
+        OpticalDistortion(),
+        GridDistortion(),
+        ElasticTransform(),
+        MedianBlur(),
       #  RandomGamma(),
       #  RandomRotate90(),
         post_transform(**kwargs)

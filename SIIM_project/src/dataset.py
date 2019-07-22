@@ -52,21 +52,21 @@ class TrainDataset(BaseDataset):
     def __getitem__(self, index):
         name = self.csv_file.iloc[index].ImageId
         image = pydicom.dcmread(os.path.join(self.path, name + '.dcm')).pixel_array
-        label = self.csv_file.iloc[index].label
+        # label = self.csv_file.iloc[index].label
         RLE_mask = self.csv_file.loc[self.csv_file['ImageId'] == name][" EncodedPixels"].values[0]
         #
-        # if RLE_mask.strip() != str(-1):
-        #     rle_mask = rle2mask(RLE_mask[1:], 1024, 1024).T
-        # else:
-        #     rle_mask = np.zeros((1024, 1024))
-
-        # dict_trasnformns = self.transform(image=image[:, :, None], mask=rle_mask)
-        dict_trasnformns = self.transform(image=image[:, :, None])
+        if RLE_mask.strip() != str(-1):
+            rle_mask = rle2mask(RLE_mask[1:], 1024, 1024).T
+        else:
+            rle_mask = np.zeros((1024, 1024))
+        #
+        dict_trasnformns = self.transform(image=image[:, :, None], mask=rle_mask)
+        # dict_trasnformns = self.transform(image=image[:, :, None])
         image = dict_trasnformns['image']
-        # rle_mask = dict_trasnformns['mask']
+        rle_mask = dict_trasnformns['mask']
 
-        # return {"image": image, "mask": rle_mask}
-        return {"image": image, "mask": label}
+        return {"image": image, "mask": rle_mask}
+        # return {"image": image, "mask": label}
 
     def __len__(self):
         return len(self.csv_file)
@@ -76,8 +76,8 @@ class TestDataset(BaseDataset):
     def __init__(self, path, image_csv, transform):
         super().__init__(image_csv, transform)
         self.path = path
-        self.folds = image_csv
         self.csv_file = image_csv
+        self.transform = transform
 
     def __getitem__(self, index):
         name = self.csv_file.iloc[index].ImageId

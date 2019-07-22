@@ -15,6 +15,7 @@ class CrossEntropyLoss(nn.Module):
         targets = targets.type(torch.cuda.LongTensor).view(-1)
         return self.loss(logits, targets)
 
+
 class BCE(nn.Module):
     def __init__(self, weight=None, size_average=True):
         super(BCE, self).__init__()
@@ -86,10 +87,40 @@ class LossBinaryDice(nn.Module):
             smooth = torch.tensor(1e-15).double()
             target = (targets > 0.0).double()
             prediction = F.sigmoid(outputs).double()
-            dice_part = (1 - (2 * torch.sum(prediction * target, dim=0) + smooth) / \
+            dice_part = (1 - (2 * torch.sum(prediction * target, dim=0) + smooth) /
                          (torch.sum(prediction, dim=0) + torch.sum(target, dim=0) + smooth))
 
             loss += self.dice_weight * dice_part.mean()
+        return loss
+
+
+
+class LossBinaryDice_withDistance(nn.Module):
+    def __init__(self, dice_weight=1):
+        super(LossBinaryDice_withDistance, self).__init__()
+        self.nll_loss = nn.BCEWithLogitsLoss()
+        self.dice_weight = dice_weight
+
+    def forward(self, outputs, targets):
+        smooth = torch.tensor(1e-15).double()
+        dist = torch.zeros_like(targets)
+        for k in range(targets.shape[0]):
+            for i in range(targets.shape[2]):
+                for j in range(targets.shape[3]):
+                    dist[k, 0, i, j] = torch.mean(targets[max(i - 1, 0): min(i + 2, dist.shape[2]), max(j - 1, 0): min(j + 2, dist.shape[3])]) + 0.3333
+
+        dist = 1 / dist
+        print('b shape ', dist.shape)
+        loss = -torch.mean(targets * torch.log(outputs + smooth)
+                               + (1. - targets) * torch.log(1. - outputs + smooth) * dist)
+
+        if self.dice_weight:
+            target = (targets > 0.0).double().cuda()
+            prediction = F.sigmoid(outputs).double().cuda()
+            dice_part = (1 - (2 * torch.sum(prediction * target, dim=0) + smooth) /
+                         (torch.sum(prediction, dim=0) + torch.sum(target, dim=0) + smooth))
+
+            loss += self.dice_weight * dice_part.mean().float()
         return loss
 
 

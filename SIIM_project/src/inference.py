@@ -25,6 +25,32 @@ cv2.setNumThreads(0)
 torch.backends.cudnn.deterministic = True
 torch.backends.cudnn.benchmark = True
 
+def mask_to_rle(img, width=1024, height=1024):
+    rle = []
+    lastColor = 0
+    currentPixel = 0
+    runStart = -1
+    runLength = 0
+
+    for x in range(width):
+        for y in range(height):
+            currentColor = img[x][y]
+            if currentColor != lastColor:
+                if currentColor == 1:
+                    runStart = currentPixel
+                    runLength = 1
+                else:
+                    rle.append(str(runStart))
+                    rle.append(str(runLength))
+                    runStart = -1
+                    runLength = 0
+                    currentPixel = 0
+            elif runStart > -1:
+                runLength += 1
+            lastColor = currentColor
+            currentPixel+=1
+    return " " + " ".join(rle)
+
 class PytorchInference:
     def __init__(self, device, activation='sigmoid'):
         self.device = device
@@ -70,8 +96,8 @@ def main():
     paths = paths['data']
 
     dataset = TestDataset(
-            path=Path(paths['path']),
-            image_csv=pd.read_csv(os.path.join(paths['path'], paths['test_images'])),
+            path=Path(os.path.join(paths['path'], paths['test_images'])),
+            image_csv=pd.read_csv(os.path.join(paths['path'], paths['test_csv'])),
             transform=test_transform(**config['data_params']['augmentation_params']))
 
     loader = DataLoader(
@@ -85,15 +111,14 @@ def main():
     device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
     inferencer = PytorchInference(device)
 
-    test_csv = pd.read_csv(os.path.join(paths['path'], paths['test_images']))
-    test_csv['predicted_class'] = None
-    test_csv['class_prob'] = None
+
+    test_csv = pd.read_csv(os.path.join(paths['path'], paths['test_csv']))
+    test_csv['predicted_EncodedPixels'] = None
     i = 0
     for pred in tqdm(inferencer.predict(model, loader), total=len(dataset)):
-        test_csv.loc[i, 'predicted_class'] = np.argmax(pred)
-        test_csv.loc[i, 'class_prob'] = pred[1]
-        i +=1
-    test_csv.to_csv(os.path.join(paths['path'], paths['test_images']), index=False)
+        test_csv['predicted_EncodedPixels'] = mask_to_rle(cv2.resize(pred, dsize=(1024, 1024), interpolation=cv2.INTER_NEAREST))
+        i += 1
+    test_csv.to_csv(os.path.join(paths['path'], paths['test_csv']), index=False)
 
 if __name__== '__main__':
     main()
