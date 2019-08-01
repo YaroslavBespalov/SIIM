@@ -77,9 +77,10 @@ class LossBinaryDice(nn.Module):
         self.dice_weight = dice_weight
 
     def forward(self, outputs, targets):
+        print("output shape", outputs.shape)
+        print("targets shape", targets.shape)
         targets = targets.squeeze().view(-1).double()
         outputs = outputs.squeeze().view(-1).double()
-
         loss = self.nll_loss(outputs, targets)
 
         if self.dice_weight:

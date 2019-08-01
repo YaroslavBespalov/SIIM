@@ -100,11 +100,51 @@ class Binary_Accuracy(nn.Module):
         prediction = (prediction > treshold).float()
         return (prediction == target.float()).float().mean()
 
+
+class Accuracy50(nn.Module):
+    def __init__(self, ):
+        super(Accuracy50, self).__init__()
+
+    def forward(self, prediction, target, threshold=0.5):
+        prediction = nn.Softmax(dim=-1)(prediction).detach().cpu().numpy()
+        target = target.detach().cpu().numpy()
+        prediction = [0 if pred[1] < threshold else 1 for pred in prediction]
+        metric = (prediction == target).astype(float).mean()
+        return metric
+
+
+class Accuracy10(nn.Module):
+    def __init__(self, ):
+        super(Accuracy10, self).__init__()
+
+    def forward(self, prediction, target, threshold=0.1):
+        prediction = nn.Softmax(dim=-1)(prediction).detach().cpu().numpy()
+        target = target.detach().cpu().numpy()
+        prediction = [0 if pred[1] < threshold else 1 for pred in prediction]
+        metric = (prediction == target).astype(float).mean()
+        return metric
+
+
+class Accuracy90(nn.Module):
+    def __init__(self, ):
+        super(Accuracy90, self).__init__()
+
+    def forward(self, prediction, target, threshold=0.9):
+        prediction = nn.Softmax(dim=-1)(prediction).detach().cpu().numpy()
+        target = target.detach().cpu().numpy()
+        prediction = [0 if pred[1] < threshold else 1 for pred in prediction]
+        metric = (prediction == target).astype(float).mean()
+        return metric
+
+
 class roc_auc_compute_fn(nn.Module):
     def __init__(self, ):
         super(roc_auc_compute_fn, self).__init__()
 
     def forward(self, prediction, target):
+        prediction = nn.Softmax(dim=-1)(prediction).detach().cpu().numpy()
         y_true = target.detach().cpu().numpy()
-        y_pred = prediction.detach().cpu().numpy()
+        y_pred = [pred[1] for pred in prediction]
+
         return roc_auc_score(y_true, y_pred)
+

@@ -1,22 +1,20 @@
 data_params:
   batch_size: 16
-  num_workers: 16
+  num_workers: 64
   augmentation_params:
-    resize: 320
+    resize: 256
 
 train_params:
-  name: rn18
-  model: models.MultiResnet18
-  model_params:
-    num_filters: 16
-    pretrained: True
-    num_classes: 2
+  name: segmentator_UNet_inference
+  model: models_zoo.segmentation.resnet.MultiResnet50
+  model_params: {
+    num_classes: 1}
   loss: losses.BCELoss2d
   loss_params: {}
   metrics: [losses.BCELoss2d]
   steps_per_epoch: 2500
   new_save: True
-#  weights:
+  weights: ../weights/resnet.MultiResnet50_L_LBD_M_Dice/0/tt_2_0.69297.pt
 stages:
 -
   load_best: False
@@ -28,4 +26,4 @@ stages:
     milestones: [ 0, 10, 20, 30]
     gamma: 0.7
   epochs: 300
-  augmentation: mix_transform
+  augmentation: test_transform

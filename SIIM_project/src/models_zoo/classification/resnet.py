@@ -14,9 +14,9 @@ __all__ = ['ResNet', 'resnet18', 'resnet34', 'resnet50', 'resnet101',
 model_urls = {
     'resnet18': 'https://download.pytorch.org/models_zoo/resnet18-5c106cde.pth',
     'resnet34': 'https://download.pytorch.org/models/resnet34-333f7ec4.pth',
-    'resnet50': 'https://download.pytorch.org/models_zoo/resnet50-19c8e357.pth',
-    'resnet101': 'https://download.pytorch.org/models_zoo/resnet101-5d3b4d8f.pth',
-    'resnet152': 'https://download.pytorch.org/models_zoo/resnet152-b121ed2d.pth',
+    'resnet50': 'https://download.pytorch.org/models/resnet50-19c8e357.pth',
+    'resnet101': 'https://download.pytorch.org/models/resnet101-5d3b4d8f.pth',
+    'resnet152': 'https://download.pytorch.org/models/resnet152-b121ed2d.pth',
 }
 
 
@@ -101,7 +101,7 @@ class ResNet(nn.Module):
     def __init__(self, block, layers, num_classes=1000):
         self.inplanes = 64
         super(ResNet, self).__init__()
-        # self.conv1 = nn.Conv2d(3, 64, kernel_size=7, stride=2, padding=3,
+        # self.conv1_hand_made = nn.Conv2d(1, 64, kernel_size=7, stride=2, padding=3,
         #                        bias=False)
         self.conv1 = nn.Conv2d(1, 64, kernel_size=7, stride=2, padding=3,
                                bias=False)
@@ -193,6 +193,10 @@ def resnet50(pretrained=False, **kwargs):
     model = ResNet(Bottleneck, [3, 4, 6, 3], **kwargs)
     if pretrained:
         model.load_state_dict(model_zoo.load_url(model_urls['resnet50']))
+
+### 1 KANALNIY RESNET50
+        model.conv1 = nn.Conv2d(1, 64, kernel_size=7, stride=2, padding=3,
+                               bias=False)
     return model
 
 

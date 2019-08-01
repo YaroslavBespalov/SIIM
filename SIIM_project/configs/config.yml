@@ -1,24 +1,27 @@
 data_params:
-  batch_size: 43
+  batch_size: 32
   num_workers: 16
   augmentation_params:
-    resize: 224
+    resize: 256
 
 train_params:
-  name: Classification_resnet_34
+  name: print_shapes #resnet.MultiResnet50_L_LBD_M_Dice
 # 3d_unet_ChannelAttention_flip_plus_shift_raq_FPN
 #  model: models_zoo.segmentation.pspnet.PSPNet
-  model: models_zoo.classification.resnet.resnet34
-#  model: models_zoo.segmentation.unet3d.Modified3DUNet
+#  model: models_zoo.classification.resnet.resnet34
+  model: models_zoo.segmentation.resnet.MultiResnet50
   model_params: {
-#    num_filters: 16
-#    pretrained: False
-#    n_classes: 2
+    num_filters: 16,
+    pretrained: True,
     num_classes: 1}
-  loss: losses.BCE
-#   loss: losses.CrossEntropyLoss
+
+#    num_filters: 16
+#    n_classes: 1}
+# loss: losses.BCE
+
+  loss: losses.LossBinaryDice
   loss_params: {}
-  metrics: [metrics.Binary_Accuracy, metrics.roc_auc_compute_fn]
+  metrics: [metrics.Dice]
   steps_per_epoch: 2500
   new_save: True
 #  weights: ../weights/Unet3d_organ_23_06/0/tt_2_0.09316.pt
@@ -27,7 +30,7 @@ stages:
   load_best: False
   optimizer: SGD
   optimizer_params:
-    lr: 0.0003
+    lr: 0.01
   scheduler: ReduceLROnPlateau
   scheduler_params:
     patience: 15

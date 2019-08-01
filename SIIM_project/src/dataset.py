@@ -18,6 +18,7 @@ class DataLoaderX(DataLoader):
     def __iter__(self):
         return BackgroundGenerator(super().__iter__())
 
+
 def rle2mask(rle, width, height):
     mask = np.zeros(width * height)
     array = np.asarray([int(x) for x in rle.split()])
@@ -69,33 +70,38 @@ class TrainDataset(BaseDataset):
         # rle_mask = dict_trasnformns['mask']
         # return {"image": torchvision.transforms.ToTensor()(image), "mask": torchvision.transforms.ToTensor()(rle_mask)}
 #SEGMENTATION
-        # dict_transfors = self.transform(image=image[:,:,None], mask=rle_mask[:,:,None])
-        # image = dict_transfors['image'] #.permute(2,0,1)
-        # rle_mask = dict_transfors['mask'] #.permute(2, 0, 1)
+        dict_transfors = self.transform(image=image[:,:,None], mask=rle_mask[:,:,None])
+        image = dict_transfors['image'] #.permute(2,0,1)
+        rle_mask = dict_transfors['mask'] #.permute(2, 0, 1)
 # CLASSIFICATION
-        dict_trasnformns = self.transform(image=image[:,:,None], mask=image[:,:,None])
-        image = dict_trasnformns['image']
-        label = self.csv_file['label'].values[index]
+#         dict_trasnformns = self.transform(image=image[:,:,None], mask=image[:,:,None])
+#         image = dict_trasnformns['image']
+#         label = self.csv_file['label'].values[index]
 
         #print("Image None Shape",image.shape)
        # print("Mask None Shape", rle_mask.shape)
-        return {"image":image, "mask":label}
+        return {"image":image, "mask":rle_mask}
 
     def __len__(self):
         return len(self.csv_file)
 
 
 class TestDataset(BaseDataset):
-    def __init__(self, image_dir, ids, transform):
-        super().__init__(image_dir, ids, transform)
-        self.transform = transform
-        self.ids = ids
-        self.image_dir = image_dir
+    def __init__(self, path, image_csv, transform):
+        super().__init__(image_csv, transform)
+        self.path = path
+        self.folds = image_csv
+        #self.csv_file = image_csv
+        self.csv_file =image_csv[image_csv["fold"]==0]
+
 
     def __getitem__(self, index):
-        name = self.ids[index]
-        image = cv2.imread(os.path.join(self.image_dir, name))
-        return self.transform(image=image)['image']
+        name = self.csv_file.iloc[index].ImageId
+        image = pydicom.dcmread(os.path.join(self.path, name + '.dcm')).pixel_array
+        return self.transform(image=image[:, :, None])['image']
+
+    def __len__(self):
+        return len(self.csv_file)
 
 
 class TaskDataFactory(DataFactory):
