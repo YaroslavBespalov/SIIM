@@ -90,13 +90,16 @@ class Accuracy(nn.Module):
         super(Accuracy, self).__init__()
 
     def forward(self, prediction, target):
-        return (prediction.argmax(dim=1, keepdim=True) == target).float().mean()
+        prediction=torch.squeeze(prediction)
+        return (prediction.argmax(dim=0) == target).float().mean()
 
 class Binary_Accuracy(nn.Module):
     def __init__(self, ):
         super(Binary_Accuracy, self).__init__()
 
     def forward(self, prediction, target, treshold=0.5):
+        prediction = torch.squeeze(prediction)
+        prediction = torch.nn.Sigmoid()(prediction)
         prediction = (prediction > treshold).float()
         return (prediction == target.float()).float().mean()
 

@@ -1,6 +1,12 @@
 import torch.nn as nn
 import math
 import torch.utils.model_zoo as model_zoo
+import torch
+from efficientnet_pytorch import EfficientNet
+
+def EfficientNet_1class():
+    model = EfficientNet.from_pretrained('efficientnet-b4', num_classes=1) #, num_classes=1)
+    return model
 
 try:
     from torch.hub import load_state_dict_from_url
@@ -103,7 +109,7 @@ class ResNet(nn.Module):
         super(ResNet, self).__init__()
         # self.conv1_hand_made = nn.Conv2d(1, 64, kernel_size=7, stride=2, padding=3,
         #                        bias=False)
-        self.conv1 = nn.Conv2d(1, 64, kernel_size=7, stride=2, padding=3,
+        self.conv1 = nn.Conv2d(3, 64, kernel_size=7, stride=2, padding=3,
                                bias=False)
         self.bn1 = nn.BatchNorm2d(64)
         self.relu = nn.ReLU(inplace=True)
@@ -180,6 +186,9 @@ def resnet34(pretrained=False, **kwargs):
     if pretrained:
         state_dict = load_state_dict_from_url(model_urls['resnet34'])
         model.load_state_dict(state_dict)
+        model.conv1 = nn.Conv2d(1, 64, kernel_size=7, stride=2, padding=3,
+                                bias=False)
+        model.fc = nn.Linear(512, 1)
         #model.load_state_dict(model_zoo.load_url(model_urls['resnet34']))
     return model
 

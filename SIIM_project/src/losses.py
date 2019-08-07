@@ -50,24 +50,38 @@ class BCELoss2d(nn.Module):
 #     def forward(self, input, target):
 #         return self.bce_with_logits((1 - torch.sigmoid(input)) ** self.gamma * F.logsigmoid(input), target)
 
+# class FocalLoss(nn.Module): # Фокал лосс кости
+#     def __init__(self, gamma=2):
+#         super().__init__()
+#         self.gamma = gamma
+#
+#     def forward(self, input, target):
+#         if not (target.size() == input.size()):
+#             raise ValueError("Target size ({}) must be the same as input size ({})"
+#                              .format(target.size(), input.size()))
+#
+#         max_val = (-input).clamp(min=0)
+#         loss = input - input * target + max_val + \
+#                ((-max_val).exp() + (-input - max_val).exp()).log()
+#
+#         invprobs = F.logsigmoid(-input * (target * 2.0 - 1.0))
+#         loss = (invprobs * self.gamma).exp() * loss
+#
+#         return loss.sum(dim=1).mean()
+
+
+
 class FocalLoss(nn.Module):
-    def __init__(self, gamma=2):
+    def __init__(self, alpha=1., gamma=2.):
         super().__init__()
+        self.alpha = alpha
         self.gamma = gamma
 
-    def forward(self, input, target):
-        if not (target.size() == input.size()):
-            raise ValueError("Target size ({}) must be the same as input size ({})"
-                             .format(target.size(), input.size()))
-
-        max_val = (-input).clamp(min=0)
-        loss = input - input * target + max_val + \
-               ((-max_val).exp() + (-input - max_val).exp()).log()
-
-        invprobs = F.logsigmoid(-input * (target * 2.0 - 1.0))
-        loss = (invprobs * self.gamma).exp() * loss
-
-        return loss.sum(dim=1).mean()
+    def forward(self, inputs, targets, **kwargs):
+        CE_loss = nn.CrossEntropyLoss(reduction='none')(inputs, targets)
+        pt = torch.exp(-CE_loss)
+        F_loss = self.alpha * ((1-pt)**self.gamma) * CE_loss
+        return F_loss.mean()
 
 
 class LossBinaryDice(nn.Module):

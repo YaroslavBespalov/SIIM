@@ -143,28 +143,6 @@ class Runner:
         images = data['image']
         labels = data['mask']
 
-        # tmp_img_list = []
-        # print(labels.shape)
-        # for i in labels:
-        #     print(i.shape)
-        #     resample_ids = self.resample(i.shape[1])
-        #     tmp = i[0, resample_ids, :, :]
-        #     print("tmp", tmp.shape)
-        #     qwa = []
-        #     for j in tmp:
-        #         j = transforms.ToPILImage()(j)
-        #         qwa.append(transforms.Resize((224, 224))(j))
-        #     print(len(qwa))
-        #     tmp_img = torch.stack(qwa, dim=0)
-        #     tmp_img=tmp_img[None] #[None]
-        #     print("tmp_img", tmp_img.shape)
-            #tmp_img = transforms.Resize((224, 224))(tmp[0])
-            # for slice in tmp[1:]:
-            #     tmp_img = torch.stack(tmp_img, transforms.Resize((resample_ids, 224, 224))(slice))
-            # tmp_img_list.append(tmp_img[None])
-
-        # labels = torch.Tensor(tmp_img_list)
-        
         if is_train:
             self.optimizer.zero_grad()
 

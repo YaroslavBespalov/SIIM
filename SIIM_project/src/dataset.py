@@ -60,27 +60,29 @@ class TrainDataset(BaseDataset):
 
         name = self.csv_file.iloc[index].ImageId
         image = pydicom.dcmread(os.path.join(self.path, name + '.dcm')).pixel_array
-        RLE_mask = self.csv_file.loc[self.csv_file['ImageId'] == name][" EncodedPixels"].values[0]
-        if RLE_mask.strip() != str(-1):
-            rle_mask = rle2mask(RLE_mask[1:], 1024, 1024).T
-        else:
-            rle_mask = np.zeros((1024, 1024))
+        # RLE_mask = self.csv_file.loc[self.csv_file['ImageId'] == name][" EncodedPixels"].values[0]
+        # if RLE_mask.strip() != str(-1):
+        #     rle_mask = rle2mask(RLE_mask[1:], 1024, 1024).T
+        # else:
+        #     rle_mask = np.zeros((1024, 1024))
+        # ^^ Nado raskomentit
+
+
         # dict_trasnformns = self.transform(image=image, mask=rle_mask)
         # image = dict_trasnformns['image']
         # rle_mask = dict_trasnformns['mask']
         # return {"image": torchvision.transforms.ToTensor()(image), "mask": torchvision.transforms.ToTensor()(rle_mask)}
 #SEGMENTATION
-        dict_transfors = self.transform(image=image[:,:,None], mask=rle_mask[:,:,None])
-        image = dict_transfors['image'] #.permute(2,0,1)
-        rle_mask = dict_transfors['mask'] #.permute(2, 0, 1)
+        # dict_transfors = self.transform(image=image[:,:,None], mask=rle_mask[:,:,None])
+        # image = dict_transfors['image'] #.permute(2,0,1)
+        # rle_mask = dict_transfors['mask'] #.permute(2, 0, 1)
 # CLASSIFICATION
-#         dict_trasnformns = self.transform(image=image[:,:,None], mask=image[:,:,None])
-#         image = dict_trasnformns['image']
-#         label = self.csv_file['label'].values[index]
-
-        #print("Image None Shape",image.shape)
-       # print("Mask None Shape", rle_mask.shape)
-        return {"image":image, "mask":rle_mask}
+        dict_trasnforms = self.transform(image=image[:,:], mask=image[:,:])
+        image = dict_trasnforms['image']
+        label = self.csv_file['label'].values[index]
+        image = image[None,:,:]
+        final_image_EfficientNet = np.concatenate((image, image, image), axis=0)
+        return {"image":final_image_EfficientNet, "mask":label}
 
     def __len__(self):
         return len(self.csv_file)
