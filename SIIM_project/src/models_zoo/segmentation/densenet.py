@@ -8,10 +8,10 @@ from collections import OrderedDict
 from .resnext import DecoderBlockV2, DecoderSEBlockV2, ConvBn2d, ConvRelu
 
 model_urls = {
-    'densenet121': 'https://download.pytorch.org/models_zoo/densenet121-a639ec97.pth',
-    'densenet169': 'https://download.pytorch.org/models_zoo/densenet169-b2777c0a.pth',
-    'densenet201': 'https://download.pytorch.org/models_zoo/densenet201-c1103571.pth',
-    'densenet161': 'https://download.pytorch.org/models_zoo/densenet161-8d451a50.pth',
+    'densenet121': 'https://download.pytorch.org/models/densenet121-a639ec97.pth',
+    'densenet169': 'https://download.pytorch.org/models/densenet169-b2777c0a.pth',
+    'densenet201': 'https://download.pytorch.org/models/densenet201-c1103571.pth',
+    'densenet161': 'https://download.pytorch.org/models/densenet161-8d451a50.pth',
 }
 
 

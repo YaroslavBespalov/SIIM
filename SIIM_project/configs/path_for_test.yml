@@ -1,13 +1,13 @@
 dumps:
-  path: ../   # path to weights dir
+  path: ../weights/densenet121/0/tt_9_0.54119.pt   # path to weights dir
   weights: weights                  # name of weights dir
   logs: logs                        # name of logs dir
   name_save: tt                     # name to save models
 
 data:
-  path: ../../../../raid/data/ibespalov/SIIM_ACR/train_samples # path to data directory
+  path: ../../../../raid/data/ibespalov/SIIM_ACR/test_samples # path to data directory
   train_images: ./   # dir to train images
   train_masks: ./    # dir to labels
-  test_images: ../train_segmentation.csv # dir to test
-  folds: ../train_segmentation.csv    # validation folds
+  test_images: ../submission.csv # dir to test
+  folds: ../submission.csv    # validation folds
   predictions_path: preds.csv # predictions name

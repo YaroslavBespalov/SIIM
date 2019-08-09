@@ -71,17 +71,17 @@ class BCELoss2d(nn.Module):
 
 
 
-class FocalLoss(nn.Module):
-    def __init__(self, alpha=1., gamma=2.):
-        super().__init__()
-        self.alpha = alpha
-        self.gamma = gamma
-
-    def forward(self, inputs, targets, **kwargs):
-        CE_loss = nn.CrossEntropyLoss(reduction='none')(inputs, targets)
-        pt = torch.exp(-CE_loss)
-        F_loss = self.alpha * ((1-pt)**self.gamma) * CE_loss
-        return F_loss.mean()
+# class FocalLoss(nn.Module):
+#     def __init__(self, alpha=1., gamma=2.):
+#         super().__init__()
+#         self.alpha = alpha
+#         self.gamma = gamma
+#
+#     def forward(self, inputs, targets, **kwargs):
+#         CE_loss = nn.CrossEntropyLoss(reduction='none')(inputs, targets)
+#         pt = torch.exp(-CE_loss)
+#         F_loss = self.alpha * ((1-pt)**self.gamma) * CE_loss
+#         return F_loss.mean()
 
 
 class LossBinaryDice(nn.Module):
@@ -91,18 +91,19 @@ class LossBinaryDice(nn.Module):
         self.dice_weight = dice_weight
 
     def forward(self, outputs, targets):
-        print("output shape", outputs.shape)
-        print("targets shape", targets.shape)
-        targets = targets.squeeze().view(-1).double()
-        outputs = outputs.squeeze().view(-1).double()
+        # targets = targets.squeeze().view(-1).double()
+        # outputs = outputs.squeeze().view(-1).double()
+        targets = targets.squeeze().float()
+        outputs = outputs.squeeze().float()
         loss = self.nll_loss(outputs, targets)
 
         if self.dice_weight:
-            smooth = torch.tensor(1e-15).double()
-            target = (targets > 0.0).double()
-            prediction = F.sigmoid(outputs).double()
-            dice_part = (1 - (2 * torch.sum(prediction * target, dim=0) + smooth) / \
-                         (torch.sum(prediction, dim=0) + torch.sum(target, dim=0) + smooth))
+            smooth = torch.tensor(1e-15).float()
+            target = (targets > 0.0).float()
+            prediction = F.sigmoid(outputs).float()
+
+            dice_part = (1 - (2 * torch.sum(prediction * target, dim=(1,2)) + smooth) / \
+                         (torch.sum(prediction, dim=(1,2)) + torch.sum(target, dim=(1,2)) + smooth))
 
             loss += self.dice_weight * dice_part.mean()
         return loss
@@ -258,3 +259,52 @@ class CrossEntropyDiceLoss3D(nn.Module):
     def forward(self, logits, targets):
         return self.ce_loss(logits, targets) \
                + self.dice_weight * self.dice_loss(logits, targets)
+
+
+## SIIM
+
+def dice_loss_init(input, target):
+    input = torch.sigmoid(input)
+    smooth = 1e-15
+    iflat = input.view(-1)
+    tflat = target.view(-1)
+    intersection = (iflat * tflat).sum()
+    return ((2.0 * intersection + smooth) / (iflat.sum() + tflat.sum() + smooth))
+
+
+def dice_loss(prediction, target):
+    smooth = torch.tensor(1e-15).float()
+    prediction = prediction.sigmoid()
+    # prediction = (prediction.view(-1)).double()
+    # target = target.view(-1).double()
+    # prediction = (prediction > self.threshold).float()
+    target = target.float()
+    dice = (2 * torch.sum(prediction * target, dim=(1, 2, 3)) + smooth) / \
+    (torch.sum(prediction, dim=(1, 2, 3)) + torch.sum(target, dim=(1, 2, 3)) + smooth)
+    return dice.mean()
+
+class FocalLoss(nn.Module):
+    def __init__(self, gamma=2.):
+        super().__init__()
+        self.gamma = gamma
+
+    def forward(self, input, target):
+        if not (target.size() == input.size()):
+            raise ValueError("Target size ({}) must be the same as input size ({})"
+                             .format(target.size(), input.size()))
+        max_val = (-input).clamp(min=0)
+        loss = input - input * target + max_val + \
+               ((-max_val).exp() + (-input - max_val).exp()).log()
+        invprobs = F.logsigmoid(-input * (target * 2.0 - 1.0))
+        loss = (invprobs * self.gamma).exp() * loss
+        return loss.mean()
+
+class MixedLoss(nn.Module):
+    def __init__(self, alpha=1., gamma=2.):
+        super().__init__()
+        self.alpha = alpha
+        self.focal = FocalLoss(gamma)
+
+    def forward(self, input, target):
+        loss = (self.alpha*self.focal(input, target) + torch.log(1 - dice_loss(input, target)))
+        return loss.mean()

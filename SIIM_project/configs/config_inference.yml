@@ -1,20 +1,22 @@
 data_params:
-  batch_size: 16
+  batch_size: 4
   num_workers: 64
   augmentation_params:
-    resize: 256
+    resize: 512
 
 train_params:
-  name: segmentator_UNet_inference
-  model: models_zoo.segmentation.resnet.MultiResnet50
-  model_params: {
-    num_classes: 1}
+  name: densenet121_test
+  model: models_zoo.segmentation.densenet.MultiSEDensenet121
+  model_params:
+    num_filters: 16
+    pretrained: True
+    num_classes: 1
   loss: losses.BCELoss2d
   loss_params: {}
   metrics: [losses.BCELoss2d]
   steps_per_epoch: 2500
   new_save: True
-  weights: ../weights/resnet.MultiResnet50_L_LBD_M_Dice/0/tt_2_0.69297.pt
+  weights: ../weights/densenet121/0/tt_9_0.54119.pt
 stages:
 -
   load_best: False

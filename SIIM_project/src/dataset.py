@@ -60,11 +60,11 @@ class TrainDataset(BaseDataset):
 
         name = self.csv_file.iloc[index].ImageId
         image = pydicom.dcmread(os.path.join(self.path, name + '.dcm')).pixel_array
-        # RLE_mask = self.csv_file.loc[self.csv_file['ImageId'] == name][" EncodedPixels"].values[0]
-        # if RLE_mask.strip() != str(-1):
-        #     rle_mask = rle2mask(RLE_mask[1:], 1024, 1024).T
-        # else:
-        #     rle_mask = np.zeros((1024, 1024))
+        RLE_mask = self.csv_file.loc[self.csv_file['ImageId'] == name][" EncodedPixels"].values[0]
+        if RLE_mask.strip() != str(-1):
+            rle_mask = rle2mask(RLE_mask[1:], 1024, 1024).T
+        else:
+            rle_mask = np.zeros((1024, 1024))
         # ^^ Nado raskomentit
 
 
@@ -77,12 +77,13 @@ class TrainDataset(BaseDataset):
         # image = dict_transfors['image'] #.permute(2,0,1)
         # rle_mask = dict_transfors['mask'] #.permute(2, 0, 1)
 # CLASSIFICATION
-        dict_trasnforms = self.transform(image=image[:,:], mask=image[:,:])
+        dict_trasnforms = self.transform(image=image[:,:], mask=rle_mask[:,:])
         image = dict_trasnforms['image']
-        label = self.csv_file['label'].values[index]
+        mask = dict_trasnforms['mask']
+        # label = self.csv_file['label'].values[index]
         image = image[None,:,:]
-        final_image_EfficientNet = np.concatenate((image, image, image), axis=0)
-        return {"image":final_image_EfficientNet, "mask":label}
+        # final_image_EfficientNet = np.concatenate((image, image, image), axis=0)
+        return {"image":image, "mask":mask}
 
     def __len__(self):
         return len(self.csv_file)
@@ -94,13 +95,22 @@ class TestDataset(BaseDataset):
         self.path = path
         self.folds = image_csv
         #self.csv_file = image_csv
-        self.csv_file =image_csv[image_csv["fold"]==0]
+        self.csv_file =image_csv
 
 
     def __getitem__(self, index):
         name = self.csv_file.iloc[index].ImageId
+        # image = pydicom.dcmread(os.path.join(self.path, name + '.dcm')).pixel_array
+        # image = self.transform(image=image[:, :])['image']
+        # image = image[None, :, :]
+        # final_image_EfficientNet = np.concatenate((image, image, image), axis=0)
+        # return final_image_EfficientNet
         image = pydicom.dcmread(os.path.join(self.path, name + '.dcm')).pixel_array
-        return self.transform(image=image[:, :, None])['image']
+        dict_trasnforms = self.transform(image=image[:, :])
+        image = dict_trasnforms['image']
+        image = image[None, :, :]
+        # final_image_EfficientNet = np.concatenate((image, image, image), axis=0)
+        return image
 
     def __len__(self):
         return len(self.csv_file)

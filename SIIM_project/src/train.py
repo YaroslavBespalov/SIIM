@@ -50,7 +50,6 @@ def main():
     args = parse_args()
     # set_global_seeds(42)
     config = get_config(args.config)
-
     print(config)
     print()
 

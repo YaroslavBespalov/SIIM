@@ -1,42 +1,38 @@
 data_params:
-  batch_size: 4
+  batch_size: 28
   num_workers: 64
   augmentation_params:
-    resize: 1024
+    resize: 512
 
 train_params:
-  name: EfficientNet_classification_ok #resnet.MultiResnet50_L_LBD_M_Dice
+  name: densenet121_LBD #resnet.MultiResnet50_L_LBD_M_Dice
 # 3d_unet_ChannelAttention_flip_plus_shift_raq_FPN
 #  model: models_zoo.segmentation.pspnet.PSPNet
 #  model: models_zoo.classification.resnet.resnet34
 #  model: models_zoo.segmentation.resnet.MultiResnet50
-  model: models_zoo.classification.resnet.EfficientNet_1class #.se_resnet.se_resnext50
-  model_params: {
-  }
-    #num_classes: 1 } #,
-   # pretrained: True
-
-#    num_filters: 16
-#    n_classes: 1}
-# loss: losses.BCE
-
-  loss: losses.BCE
+  model: models_zoo.segmentation.densenet.MultiSEDensenet121
+  model_params:
+    num_filters: 16
+    pretrained: True
+    num_classes: 1
+  loss: losses.LossBinaryDice  #losses.MixedLoss
   loss_params: {}
-  metrics: [metrics.Binary_Accuracy]
-  steps_per_epoch: 2500
+  metrics: [metrics.Dice]
+  steps_per_epoch: 4000
   new_save: True
-#  weights: ../weights/Unet3d_organ_23_06/0/tt_2_0.09316.pt
+#  weights: ../weights/densenet121/0/tt_9_0.54119.pt
 stages:
 -
   load_best: False
   optimizer: Adam
   optimizer_params:
-    lr: 0.0003
+    lr: 0.0003    # 0.0003
   scheduler: ReduceLROnPlateau
   scheduler_params:
-    patience: 7
+    mode: max
+    patience: 10
     factor: 0.5
-    min_lr: 0.000001
+    min_lr: 0.00001
     verbose: True
   epochs: 750
   augmentation: mix_transform

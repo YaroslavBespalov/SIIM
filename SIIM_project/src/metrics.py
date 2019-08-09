@@ -43,16 +43,19 @@ class map3(nn.Module):
 
 
 class Dice(nn.Module):
-    def __init__(self, ):
+    def __init__(self, threshold=0.5):
         super(Dice, self).__init__()
+        self.threshold = threshold
 
     def forward(self, prediction, target):
-        smooth = torch.tensor(1e-15).double()
+        smooth = torch.tensor(1e-15).float()
         prediction = prediction.sigmoid()
-        prediction = (prediction.view(-1)).double()
-        target = target.view(-1).double()
-        dice = (2 * torch.sum(prediction * target, dim=0) + smooth) / \
-               (torch.sum(prediction, dim=0) + torch.sum(target, dim=0) + smooth)
+        # prediction = (prediction.view(-1)).double()
+        # target = target.view(-1).double()
+        prediction = (prediction > self.threshold).float()
+        target = target.float()
+        dice = (2 * torch.sum(prediction * target, dim=(1, 2, 3)) + smooth) / \
+        (torch.sum(prediction, dim=(1, 2, 3)) + torch.sum(target, dim=(1, 2, 3)) + smooth)
         return dice.mean()
 
 
@@ -151,3 +154,45 @@ class roc_auc_compute_fn(nn.Module):
 
         return roc_auc_score(y_true, y_pred)
 
+## SIIIM
+class metriccc(nn.Module):
+    def __init__(self, ):
+        super(metriccc, self).__init__()
+
+    def predict(X, threshold):
+        X_p = np.copy(X)
+        preds = (X_p > threshold).astype('uint8')
+        return preds
+
+    def forward(self, probability, truth, threshold=0.5, reduction='none'):
+        '''Calculates dice of positive and negative images seperately'''
+        '''probability and truth must be torch tensors'''
+        batch_size = len(truth)
+        with torch.no_grad():
+            probability = probability.view(batch_size, -1)
+            truth = truth.view(batch_size, -1)
+            assert(probability.shape == truth.shape)
+
+            p = (probability > threshold).float()
+            t = (truth > 0.5).float()
+
+            t_sum = t.sum(-1)
+            p_sum = p.sum(-1)
+            neg_index = torch.nonzero(t_sum == 0)
+            pos_index = torch.nonzero(t_sum >= 1)
+
+            dice_neg = (p_sum == 0).float()
+            dice_pos = 2 * (p*t).sum(-1)/((p+t).sum(-1))
+
+            dice_neg = dice_neg[neg_index]
+            dice_pos = dice_pos[pos_index]
+            dice = torch.cat([dice_pos, dice_neg])
+
+            dice_neg = np.nan_to_num(dice_neg.mean().item(), 0)
+            dice_pos = np.nan_to_num(dice_pos.mean().item(), 0)
+            dice = dice.mean().item()
+
+            num_neg = len(neg_index)
+            num_pos = len(pos_index)
+
+        return dice
