@@ -65,7 +65,13 @@ class TrainDataset(BaseDataset):
             rle_mask = rle2mask(RLE_mask[1:], 1024, 1024).T
         else:
             rle_mask = np.zeros((1024, 1024))
-        # ^^ Nado raskomentit
+
+        # dilate
+        # img = cv2.imread(rle_mask, cv2.IMREAD_GRAYSCALE)
+        # _, mask = cv2.threshold(img, 220, 255, cv2.THRESH_BINARY)
+        # kernel = np.ones((3, 3), np.uint8)
+        # rle_mask = cv2.dilate(mask, kernel, iterations=2)
+
 
 
         # dict_trasnformns = self.transform(image=image, mask=rle_mask)

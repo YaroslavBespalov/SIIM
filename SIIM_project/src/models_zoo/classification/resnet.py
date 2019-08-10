@@ -186,9 +186,9 @@ def resnet34(pretrained=False, **kwargs):
     if pretrained:
         state_dict = load_state_dict_from_url(model_urls['resnet34'])
         model.load_state_dict(state_dict)
-        model.conv1 = nn.Conv2d(1, 64, kernel_size=7, stride=2, padding=3,
-                                bias=False)
-        model.fc = nn.Linear(512, 1)
+        # model.conv1 = nn.Conv2d(1, 64, kernel_size=7, stride=2, padding=3,
+        #                         bias=False)
+        # model.fc = nn.Linear(512, 1)
         #model.load_state_dict(model_zoo.load_url(model_urls['resnet34']))
     return model
 

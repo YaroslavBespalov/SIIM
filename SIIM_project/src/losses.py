@@ -85,14 +85,14 @@ class BCELoss2d(nn.Module):
 
 
 class LossBinaryDice(nn.Module):
-    def __init__(self, dice_weight=1):
+    def __init__(self, dice_weight=2):
         super(LossBinaryDice, self).__init__()
         self.nll_loss = nn.BCEWithLogitsLoss()
         self.dice_weight = dice_weight
 
     def forward(self, outputs, targets):
-        # targets = targets.squeeze().view(-1).double()
-        # outputs = outputs.squeeze().view(-1).double()
+        # targets = targets.squeeze().view(-1).float()
+        # outputs = outputs.squeeze().view(-1).float()
         targets = targets.squeeze().float()
         outputs = outputs.squeeze().float()
         loss = self.nll_loss(outputs, targets)
@@ -101,7 +101,6 @@ class LossBinaryDice(nn.Module):
             smooth = torch.tensor(1e-15).float()
             target = (targets > 0.0).float()
             prediction = F.sigmoid(outputs).float()
-
             dice_part = (1 - (2 * torch.sum(prediction * target, dim=(1,2)) + smooth) / \
                          (torch.sum(prediction, dim=(1,2)) + torch.sum(target, dim=(1,2)) + smooth))
 
@@ -300,11 +299,13 @@ class FocalLoss(nn.Module):
         return loss.mean()
 
 class MixedLoss(nn.Module):
-    def __init__(self, alpha=1., gamma=2.):
+    def __init__(self, alpha=5., gamma=2.):
         super().__init__()
         self.alpha = alpha
         self.focal = FocalLoss(gamma)
 
+
     def forward(self, input, target):
+        # print("FOCAL", self.focal(input, target))
         loss = (self.alpha*self.focal(input, target) + torch.log(1 - dice_loss(input, target)))
         return loss.mean()

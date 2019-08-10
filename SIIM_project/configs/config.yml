@@ -1,24 +1,25 @@
 data_params:
-  batch_size: 28
+  batch_size: 10
   num_workers: 64
   augmentation_params:
     resize: 512
 
 train_params:
-  name: densenet121_LBD #resnet.MultiResnet50_L_LBD_M_Dice
+  name: MultiResnet34_LBD_10_08 #densenet121_LBD #resnet.MultiResnet50_L_LBD_M_Dice
 # 3d_unet_ChannelAttention_flip_plus_shift_raq_FPN
 #  model: models_zoo.segmentation.pspnet.PSPNet
 #  model: models_zoo.classification.resnet.resnet34
 #  model: models_zoo.segmentation.resnet.MultiResnet50
-  model: models_zoo.segmentation.densenet.MultiSEDensenet121
+  model: models_zoo.segmentation.resnet.MultiResnet34 #models_zoo.segmentation.densenet.MultiSEDensenet121
   model_params:
-    num_filters: 16
-    pretrained: True
     num_classes: 1
+#    num_filters: 16
+#    pretrained: True
   loss: losses.LossBinaryDice  #losses.MixedLoss
   loss_params: {}
-  metrics: [metrics.Dice]
+  metrics: [metrics.Dice, metrics.DiceMean]
   steps_per_epoch: 4000
+  accumulation: 5
   new_save: True
 #  weights: ../weights/densenet121/0/tt_9_0.54119.pt
 stages:
@@ -30,7 +31,7 @@ stages:
   scheduler: ReduceLROnPlateau
   scheduler_params:
     mode: max
-    patience: 10
+    patience: 20
     factor: 0.5
     min_lr: 0.00001
     verbose: True

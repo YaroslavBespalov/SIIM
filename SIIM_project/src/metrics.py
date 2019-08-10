@@ -50,6 +50,23 @@ class Dice(nn.Module):
     def forward(self, prediction, target):
         smooth = torch.tensor(1e-15).float()
         prediction = prediction.sigmoid()
+        prediction = (prediction.view(-1)).float()
+        target = target.view(-1).float()
+        prediction = (prediction > self.threshold).float()
+        # target = target.float()
+        dice = (2 * torch.sum(prediction * target) + smooth) / \
+        (torch.sum(prediction) + torch.sum(target) + smooth)
+        return dice.mean()
+
+
+class DiceMean(nn.Module):
+    def __init__(self, threshold=0.5):
+        super(DiceMean, self).__init__()
+        self.threshold = threshold
+
+    def forward(self, prediction, target):
+        smooth = torch.tensor(1e-15).float()
+        prediction = prediction.sigmoid()
         # prediction = (prediction.view(-1)).double()
         # target = target.view(-1).double()
         prediction = (prediction > self.threshold).float()
@@ -57,7 +74,6 @@ class Dice(nn.Module):
         dice = (2 * torch.sum(prediction * target, dim=(1, 2, 3)) + smooth) / \
         (torch.sum(prediction, dim=(1, 2, 3)) + torch.sum(target, dim=(1, 2, 3)) + smooth)
         return dice.mean()
-
 
 class LossMultiLabelDice(nn.Module):
     def __init__(self, dice_weight=1):

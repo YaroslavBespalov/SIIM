@@ -193,14 +193,14 @@ class MultiResnet34(nn.Module):
             x = stage(x)
             encoder_results.append(x.clone())
 
-        # x = self.center(self.pool(x))
-        #
-        # for i, decoder in enumerate(self.decoder):
-        #     x = self.decoder[i](torch.cat([x, encoder_results[-i - 1]], 1))
-        #
-        # x = self.dec1(x)
-        # x = self.dec0(x)
-        # x = self.final(x)
+        x = self.center(self.pool(x))
+
+        for i, decoder in enumerate(self.decoder):
+            x = self.decoder[i](torch.cat([x, encoder_results[-i - 1]], 1))
+
+        x = self.dec1(x)
+        x = self.dec0(x)
+        x = self.final(x)
 
         return x
 

@@ -41,6 +41,9 @@ class Runner:
 
         self.callbacks = callbacks
         self.callbacks.set_trainer(self)
+        self.step = 0
+
+        self.accumulation = self.factory.params['accumulation']
 
     def fit(self, data_factory):
         self.callbacks.on_train_begin()
@@ -143,12 +146,13 @@ class Runner:
         images = data['image']
         labels = data['mask']
 
-        if is_train:
+        if is_train and (self.step == 0):
             self.optimizer.zero_grad()
 
      #   predictions, boundaries = self.model(images)
         predictions = self.model(images)
         loss = self.loss(predictions, labels)
+        loss = loss / self.accumulation
         report['loss'] = loss.data
 
         for metric, f in self.metrics.functions.items():
@@ -158,8 +162,10 @@ class Runner:
             loss.backward()
             grad_norm = torch.nn.utils.clip_grad_norm_(self.model.parameters(), 5.0)
             report['grad'] = grad_norm
-            self.optimizer.step()
-
+            if self.step % self.accumulation == 0:
+                self.optimizer.step()
+                self.optimizer.zero_grad()
+        self.step += 1
         return report
 
     def batch2device(self, data):
