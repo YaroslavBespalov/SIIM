@@ -30,22 +30,21 @@ def mix_transform(resize):
         # VerticalFlip(),
         # HorizontalFlip(),
         # CLAHE(),
-        # RandomRotate90(),
-        # CLAHE(p=0.3),
+        # RandomRotate90(p=0.5),
+        CLAHE(p=0.5),
         HorizontalFlip(p=0.5),
         OneOf([
             RandomRotate90(),
-            # ShiftScaleRotate(
-            #     shift_limit=0,  # no resizing
-            #     scale_limit=0.1,
-            #     rotate_limit=10,  # rotate
-            #     border_mode=cv2.BORDER_CONSTANT
-            # )
-        ], p=0.3),
+            ShiftScaleRotate(
+                shift_limit=0,  # no resizing
+                scale_limit=0.1,
+                rotate_limit=10,  # rotate
+                border_mode=cv2.BORDER_CONSTANT
+            )
+        ], p=0.4),
         OneOf([
             RandomContrast(),
             RandomGamma(),
-            CLAHE(),
             RandomBrightness(),
         ], p=0.3),
         OneOf([

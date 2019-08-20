@@ -6,7 +6,7 @@ data_params:
 
 train_params:
   name: densenet121_test
-  model: models_zoo.segmentation.densenet.MultiSEDensenet121
+  model: models_zoo.segmentation.resnet.MultiResnet34 #models_zoo.segmentation.densenet.MultiSEDensenet121
   model_params:
     num_filters: 16
     pretrained: True
@@ -16,7 +16,7 @@ train_params:
   metrics: [losses.BCELoss2d]
   steps_per_epoch: 2500
   new_save: True
-  weights: ../weights/densenet121/0/tt_9_0.54119.pt
+  weights: ../weights/MultiResnet34_LBD_10_08/0/tt_7_0.44000.pt #../weights/densenet121/0/tt_9_0.54119.pt
 stages:
 -
   load_best: False

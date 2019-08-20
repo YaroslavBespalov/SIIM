@@ -8,6 +8,6 @@ data:
   path: ../../../../raid/data/ibespalov/SIIM_ACR/train_samples # path to data directory
   train_images: ./   # dir to train images
   train_masks: ./    # dir to labels
-  test_images: ../train_segmentation.csv # dir to test
-  folds: ../train_segmentation.csv    # validation folds
+  test_images: ../train_2folds.csv #train_leak_classificator.csv #../train_segmentation_1308.csv # dir to test
+  folds: ../train_2folds.csv #train_leak_classificator.csv  #../train_segmentation_1308.csv    # validation folds
   predictions_path: preds.csv # predictions name

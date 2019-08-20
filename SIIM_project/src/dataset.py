@@ -10,6 +10,8 @@ from youtrain.factory import DataFactory
 from transforms import test_transform, mix_transform
 import pydicom
 
+from skimage import exposure
+
 import torchvision
 import copy
 
@@ -33,6 +35,19 @@ def rle2mask(rle, width, height):
 
     return mask.reshape(width, height)
 
+def run_length_decode(rle, height=1024, width=1024, fill_value=1):
+    component = np.zeros((height, width), np.float32)
+    component = component.reshape(-1)
+    rle = np.array([int(s) for s in rle.strip().split(' ')])
+    rle = rle.reshape(-1, 2)
+    start = 0
+    for index, length in rle:
+        start = start+index
+        end = start+length
+        component[start: end] = fill_value
+        start = end
+    component = component.reshape(width, height).T
+    return component
 
 class BaseDataset(Dataset):
     def __init__(self, folds, transform):
@@ -60,11 +75,17 @@ class TrainDataset(BaseDataset):
 
         name = self.csv_file.iloc[index].ImageId
         image = pydicom.dcmread(os.path.join(self.path, name + '.dcm')).pixel_array
-        RLE_mask = self.csv_file.loc[self.csv_file['ImageId'] == name][" EncodedPixels"].values[0]
-        if RLE_mask.strip() != str(-1):
-            rle_mask = rle2mask(RLE_mask[1:], 1024, 1024).T
-        else:
-            rle_mask = np.zeros((1024, 1024))
+        image = exposure.equalize_adapthist(image)  # contrast correction
+        image = ((image * 255)).clip(0, 255).astype(np.uint8)
+        # RLE_mask = self.csv_file.loc[self.csv_file['ImageId'] == name][" EncodedPixels"].values[0]
+        # if RLE_mask.strip() != str(-1):
+        #     rle_mask = rle2mask(RLE_mask[1:], 1024, 1024).T
+        # else:
+        #     rle_mask = np.zeros((1024, 1024))
+
+        # RLE_mask = self.csv_file.loc[self.csv_file['ImageId'] == name]["EncodedPixels"].values[0]
+        # rle_mask = run_length_decode(RLE_mask)
+        #^^ new_version
 
         # dilate
         # img = cv2.imread(rle_mask, cv2.IMREAD_GRAYSCALE)
@@ -83,13 +104,14 @@ class TrainDataset(BaseDataset):
         # image = dict_transfors['image'] #.permute(2,0,1)
         # rle_mask = dict_transfors['mask'] #.permute(2, 0, 1)
 # CLASSIFICATION
-        dict_trasnforms = self.transform(image=image[:,:], mask=rle_mask[:,:])
+
+        dict_trasnforms = self.transform(image=image[:,:])#, mask=rle_mask[:,:])
         image = dict_trasnforms['image']
-        mask = dict_trasnforms['mask']
-        # label = self.csv_file['label'].values[index]
+        # mask = dict_trasnforms['mask']
+        label = self.csv_file['label'].values[index]
         image = image[None,:,:]
-        # final_image_EfficientNet = np.concatenate((image, image, image), axis=0)
-        return {"image":image, "mask":mask}
+        final_image_EfficientNet = np.concatenate((image, image, image), axis=0)
+        return {"image":final_image_EfficientNet, "mask":label}
 
     def __len__(self):
         return len(self.csv_file)
@@ -112,6 +134,8 @@ class TestDataset(BaseDataset):
         # final_image_EfficientNet = np.concatenate((image, image, image), axis=0)
         # return final_image_EfficientNet
         image = pydicom.dcmread(os.path.join(self.path, name + '.dcm')).pixel_array
+        image = exposure.equalize_adapthist(image)  # contrast correction
+        image = ((image * 255)).clip(0, 255).astype(np.uint8)
         dict_trasnforms = self.transform(image=image[:, :])
         image = dict_trasnforms['image']
         image = image[None, :, :]

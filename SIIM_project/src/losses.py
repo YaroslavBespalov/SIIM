@@ -16,6 +16,17 @@ class BCE(nn.Module):
         return self.loss(m(logits), targets)
 
 
+class BCEWithLogitsLoss(nn.Module):
+    def __init__(self, pos_weight= torch.tensor(3.5), size_average=True):
+        super(BCEWithLogitsLoss, self).__init__()
+        self.loss = nn.BCEWithLogitsLoss(pos_weight=pos_weight, size_average=size_average)
+
+    def forward(self, logits, targets):
+        #m = nn.Sigmoid()
+        logits = logits.float().view(-1)
+        targets = targets.float().view(-1)
+        return self.loss(logits, targets)
+
 class CrossEntropyLoss(nn.Module):
     def __init__(self, weight=None, size_average=True):
         super(CrossEntropyLoss, self).__init__()
@@ -85,7 +96,7 @@ class BCELoss2d(nn.Module):
 
 
 class LossBinaryDice(nn.Module):
-    def __init__(self, dice_weight=2):
+    def __init__(self, dice_weight=1):
         super(LossBinaryDice, self).__init__()
         self.nll_loss = nn.BCEWithLogitsLoss()
         self.dice_weight = dice_weight

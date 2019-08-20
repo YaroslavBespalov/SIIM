@@ -122,6 +122,26 @@ class Binary_Accuracy(nn.Module):
         prediction = (prediction > treshold).float()
         return (prediction == target.float()).float().mean()
 
+class Binary_Accuracy09(nn.Module):
+    def __init__(self, ):
+        super(Binary_Accuracy09, self).__init__()
+
+    def forward(self, prediction, target, treshold=0.9):
+        prediction = torch.squeeze(prediction)
+        prediction = torch.nn.Sigmoid()(prediction)
+        prediction = (prediction > treshold).float()
+        return (prediction == target.float()).float().mean()
+
+class Binary_Accuracy07(nn.Module):
+    def __init__(self, ):
+        super(Binary_Accuracy07, self).__init__()
+
+    def forward(self, prediction, target, treshold=0.7):
+        prediction = torch.squeeze(prediction)
+        prediction = torch.nn.Sigmoid()(prediction)
+        prediction = (prediction > treshold).float()
+        return (prediction == target.float()).float().mean()
+
 
 class Accuracy50(nn.Module):
     def __init__(self, ):

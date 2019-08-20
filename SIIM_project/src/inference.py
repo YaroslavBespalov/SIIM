@@ -117,6 +117,7 @@ def main():
     torch.set_num_threads(20)
     test_csv = pd.read_csv(os.path.join(paths['path'], paths['test_images']))
     print(os.path.join(paths['path'], paths['test_images']))
+    # test_csv['predicted_EncodedPixels'] = None  ####
     i = 0
     for prediction in tqdm(inferencer.predict(model, loader), total=len(dataset)):
         prediction = np.squeeze(prediction).T
@@ -125,10 +126,11 @@ def main():
         prediction = (prediction > 0.5).float()
         prediction = prediction.numpy()
         mask = mask_to_rle(cv2.resize(prediction, dsize=(1024, 1024), interpolation=cv2.INTER_NEAREST),1024,1024)
+        # test_csv.loc[i, "predicted_EncodedPixels"] = mask
         if test_csv.loc[i, "EncodedPixels"] != str(-1):
             test_csv.loc[i, "EncodedPixels"] = mask
         i += 1
-    test_csv.to_csv(os.path.join(paths['path'], "../submission.csv"), index=False)
+    test_csv.to_csv(os.path.join(paths['path'], "../submission"), index=False) #train_segmentation_view.csv
     # i = 0
     # for prediction in tqdm(inferencer.predict(model, loader), total=len(dataset)):
     #     prediction = torch.from_numpy(prediction)
