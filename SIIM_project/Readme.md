@@ -1,7 +1,7 @@
 # Global pipeline for all
 
 Requirements:
-- Cuda v9.0+
+- Cuda v9.2+
 - PyTorch v0.4.1.post2
 - albumentations
 
